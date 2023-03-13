@@ -592,7 +592,7 @@ input::-webkit-inner-spin-button {
 */
 @media screen and (max-width: 1200px) {
 	.wrap-mainform {
-		width: 700px;
+		width: 900px;
 	}
 }
 
