@@ -56,8 +56,7 @@
                                             <span class="input-group-text mw80 text">開始</span>
                                         </div>
 
-                                        <input type="date" class="form-control ta-l text text-right t-ip"
-                                            id="kaishi" />
+                                        <input type="date" class="form-control ta-l text text-right t-ip" id="kaishi" />
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +76,7 @@
                                             <span class="input-group-text mw80 text">終了</span>
                                         </div>
 
-                                        <input type="date" class="form-control ta-l text text-right t-ip"
-                                            id="shuryo" />
+                                        <input type="date" class="form-control ta-l text text-right t-ip" id="shuryo" />
                                     </div>
                                 </div>
                             </div>
@@ -116,8 +114,35 @@
                     </div>
                 </form>
             </div>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Modal image area -->
+                    <div class="modal-image-area background-error-modal">
+                        <span class="modal-close-button">X</span>
+                        <img id="imgStatusModal" class="modal-image">
+                    </div>
+
+                    <!-- Modal message area -->
+                    <div class="modal-message">
+                        <div class="modal-message-area">
+                            <span class="title-modal text">題名</span>
+                            <span class="modal-message-detail text">メッセージ</span>
+                        </div>
+
+                        <div id="buttonAreaModal">
+                            <button class="button-modal btn-common button-0" role="button"></button>
+                            <button class="button-modal btn-common button-1" role="button"></button>
+                            <button class="button-modal btn-common button-2" role="button"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <script type="module" src="./js/drawing_search.js"></script>
 </body>
 
