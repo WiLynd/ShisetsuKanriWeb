@@ -1,0 +1,13 @@
+.wrap-mainform {
+    width: 900px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#zumenRisuto tr td {
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
