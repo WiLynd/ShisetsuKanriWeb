@@ -30,29 +30,24 @@ export var I00008 = "開始日は終了日より大きいことができませ�
 /*
     ******  ERROR MESSAGE  ******
 */
-// 顧客データはありません。
-export var E00001 = "顧客データはありません。"
 // ログインに失敗しました。
-export var E00002 = "ログインに失敗しました。"
+// Login failed.
+export var E00001 = "ログインに失敗しました。"
 // データが取得できませんでした。
-export var E00003 = "データが取得できませんでした。"
+// Could not get data.
+export var E00002 = "データが取得できませんでした。"
 // データ保存に失敗しました。
-export var E00004 = "データ保存に失敗しました。"
-// 検索条件に満たす顧客情報はありません。
-export var E00005 = "検索条件に満たす顧客情報はありません。"
-// 印刷はモバイルデバイスでのみ利用できます。
-export var E00006 = "印刷はモバイルデバイスでのみ利用できます。"
+// Failed to save data.
+export var E00003 = "データ保存に失敗しました。"
 // データ処理にエラーが発生しました。
-export var E00007 = "データ処理にエラーが発生しました。"
+// An error occurred while processing the data.
+export var E00004 = "データ処理にエラーが発生しました。"
 // データはありません。
-export var E00008 = "データはありません。"
+// No data.
+export var E00005 = "データはありません。"
 // サーバーへの接続時にエラーが発生しました。
-export var E00009 = "サーバーへの接続時にエラーが発生しました。"
+// An error occurred while connecting to the server.
+export var E00006 = "サーバーへの接続時にエラーが発生しました。"
 // 入力値は正しくありません。再入力してください。
-export var E00010 = "入力値は正しくありません。再入力してください。"
-
-/*
-    ******  WARNING MESSAGE  ******
-*/
-// warning 1
-export var W00001 = "message1"
+// The input value is incorrect. Please re-enter.
+export var E00007 = "入力値は正しくありません。再入力してください。"
