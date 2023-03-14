@@ -2,10 +2,10 @@
   ******  CONSTANT  ******
 */
 :root {
-	--primary-color: #e2ffda;
-	--icon-color: #52c234;
+	--primary-color: #D5CEA3;
+	--icon-color: #F99417;
 	--gray-color: #9f9f9f;
-	--button-color: linear-gradient(to right, #52c234 0%, #113403 51%, #52c234 100%);
+	--button-color: linear-gradient(to right, #b26b14 0%, #3C2A21 , #b26b14 100%);
 }
 
 * {
@@ -477,11 +477,11 @@ input::-webkit-inner-spin-button {
 }
 
 .ui-widget-header {
-	background-color: #7ab869 !important;
+	background-color: #93BFCF !important;
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-	background-color: #7ab869;
+	background-color: #93BFCF;
 	font-weight: bold;
 	color: black;
 }
