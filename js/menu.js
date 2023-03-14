@@ -9,7 +9,7 @@ function onclickAction() {
     };
 
     document.getElementById("setsubiKanriBtn").onclick = function () { 
-        Common.movePage('/area_list_equipment_management.html') 
+        Common.movePage('/area_list.html') 
     };
 
     document.getElementById("nichijoTenkenBtn").onclick = function () { 

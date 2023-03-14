@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>  
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>  
+   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/drawing_search.css">
     <link rel="stylesheet" type="text/css" href="/css/modal.css">
@@ -24,62 +28,52 @@
                 <span id="titleForm">
                     図面検索
                 </span>
-                <form action="">
+                <form id="drawingSearch">
                     <div class="row content ed-v">
                         <div class="col-12">
                             <div class="form-group input-group">
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text">管理番号</span>
-                                    </div>
-
-                                    <input type="number" class="form-control ta-l text text-right t-ip"
-                                        id="controlNumber" />
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text mw135 text jc-e">管理番号</span>
                                 </div>
+
+                                <input type="number" class="form-control ta-l text text-right t-ip"
+                                    id="controlNumber" />
                             </div>
                         </div>
                     </div>
 
                     <div class="row content ed-v">
-                        <div class="col-6">
-                            <div class="row content">
-                                <div class="col-3">
-                                    <div class="form-group input-group">
-                                        <div>
-                                            <span class="text">作業日</span>
-                                        </div>
-                                    </div>
+                        <div class="col-6 p-r-0">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text mw135 text jc-sb">
+                                        <span>作業日</span>
+                                        <span>開始</span>
+                                    </span>
                                 </div>
-                                <div class="col-9">
-                                    <div class="form-group input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text mw80 text">開始</span>
-                                        </div>
 
-                                        <input type="date" class="form-control ta-l text text-right t-ip" id="kaishi" />
-                                    </div>
-                                </div>
+                                <input type="text" class="form-control ta-l text t-ip ta-r" id="kaishi"/>
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-6 jc-e">
                             <div class="row content ed-v">
-                                <div class="col-3 text-center">
-                                    <div>
-                                        <span class="text">~</span>
-                                    </div>
+                                <div class="col-2 ta-c">
+                                    <span class="text">～</span>
                                 </div>
-
-                                <div class="col-9">
+                                <div class="col-10 p-l-0">
                                     <div class="form-group input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text mw80 text">終了</span>
+                                            <span class="input-group-text mw70 text jc-e">
+                                                終了
+                                            </span>
                                         </div>
-
-                                        <input type="date" class="form-control ta-l text text-right t-ip" id="shuryo" />
+        
+                                        <input type="text" class="form-control ta-l text t-ip ta-r" id="shuryo"/>
                                     </div>
                                 </div>
                             </div>
+                        
                         </div>
 
                     </div>
@@ -88,7 +82,7 @@
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mw135 text">製品種別</span>
+                                    <span class="input-group-text mw135 text jc-e">製品種別</span>
                                 </div>
 
                                 <select class="custom-select combobox text" id="cbb_productType">
@@ -98,7 +92,7 @@
                                     <option value="3">副チームリーダー</option>
                                     <option value="4">ワーカー</option>
                                     <option value="5">品質管理スタッフ</option>
-                                    <option value="-" selected></option>
+                                    <option value="-" selected hidden></option>
                                 </select>
                             </div>
                         </div>
@@ -106,9 +100,14 @@
 
                     <div class="button-area">
                         <div class="row ed-v">
-                            <div class="col-8">
+                            <div class="col-3">
+                                <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-3">
+                            </div>
+                            <div class="col-3">
                                 <button type="button" class="btn btn-default text-center"
                                     id="ichiranHyojiBtn">一覧表示</button>
                             </div>
@@ -146,6 +145,12 @@
     </div>
 
     <script type="module" src="./js/drawing_search.js"></script>
+    <script type="text/javascript">
+        $(function() {
+                $("#kaishi").datepicker({ dateFormat: "yy/mm/dd" }).val()
+                $("#shuryo").datepicker({ dateFormat: "yy/mm/dd" }).val()
+        });
+    </script>
 </body>
 
 </html>

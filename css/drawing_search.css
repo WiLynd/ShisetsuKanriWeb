@@ -1,3 +1,15 @@
 .wrap-mainform {
 	width: 800px;
 }
+
+.jc-sb {
+	justify-content: space-between !important;
+}
+
+.jc-e {
+	justify-content: end !important;
+}
+
+.jc-c {
+	justify-content: center !important;
+}
