@@ -8,13 +8,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>  
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>  
-   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
-
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/drawing_search.css">
     <link rel="stylesheet" type="text/css" href="/css/modal.css">
@@ -29,7 +24,7 @@
                     図面検索
                 </span>
                 <form id="drawingSearch">
-                    <div class="row content ed-v">
+                    <div class="row content">
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
@@ -42,8 +37,8 @@
                         </div>
                     </div>
 
-                    <div class="row content ed-v">
-                        <div class="col-6 p-r-0">
+                    <div class="row content date-area">
+                        <div class="col-6 p-r-0 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="date-start-area">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text mw135 text jc-sb">
@@ -52,7 +47,9 @@
                                     </span>
                                 </div>
 
-                                <input type="text" class="form-control ta-l text t-ip ta-r" id="kaishi"/>
+                                <!-- <input type="text" class="form-control ta-l text t-ip ta-r" id="kaishi"/> -->
+                                <input type="text" class="form-control text ta-c" id="kaishi"
+                                data-date-format="yyyy/mm/dd" data-language='en'>
                             </div>
                         </div>
 
@@ -61,7 +58,7 @@
                                 <div class="col-2 ta-c">
                                     <span class="text">～</span>
                                 </div>
-                                <div class="col-10 p-l-0">
+                                <div class="col-10 p-l-0" id="date-end-area">
                                     <div class="form-group input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text mw70 text jc-e">
@@ -78,14 +75,14 @@
 
                     </div>
 
-                    <div class="row content ed-v">
+                    <div class="row content">
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text mw135 text jc-e">製品種別</span>
                                 </div>
 
-                                <select class="custom-select combobox text" id="cbb_productType">
+                                <select class="custom-select combobox text t-ip" id="cbb_productType">
                                     <option value="0">マネジャー</option>
                                     <option value="1">課長</option>
                                     <option value="2">リーダー</option>
@@ -98,8 +95,8 @@
                         </div>
                     </div>
 
-                    <div class="button-area">
-                        <div class="row ed-v">
+                    <div class="button-area p-b-10">
+                        <div class="row">
                             <div class="col-3">
                                 <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                             </div>
@@ -144,13 +141,18 @@
         </div>
     </div>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+		integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script type="module" src="./js/drawing_search.js"></script>
-    <script type="text/javascript">
-        $(function() {
-                $("#kaishi").datepicker({ dateFormat: "yy/mm/dd" }).val()
-                $("#shuryo").datepicker({ dateFormat: "yy/mm/dd" }).val()
-        });
-    </script>
 </body>
 
 </html>

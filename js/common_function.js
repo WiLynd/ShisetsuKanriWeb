@@ -109,6 +109,12 @@ function movePage(page) {
     window.location.href = page;
 }
 
+function setupDatePicker(nameDatePicker) {
+    var dpk = document.getElementById(nameDatePicker);
+    dpk.setAttribute("readOnly", "true");
+    dpk.style.backgroundColor = "White";
+}
+
 export {
-    backAction, setupModal, movePage
+    backAction, setupModal, movePage, setupDatePicker
 }

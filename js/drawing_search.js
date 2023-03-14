@@ -3,10 +3,16 @@ import * as Mess from "./message.js"
 import * as StringCS from "./string.js"
 
 /**
+   * VARIABLE
+ */
+var dateStart = null;
+var dateEnd = null;
+
+/**
    * ONCLICK ACTION
 */
 function onClickAction() {
-	document.getElementById("ichiranHyojiBtn").onclick = function () {
+   document.getElementById("ichiranHyojiBtn").onclick = function () {
       var controlNumber = document.getElementById("controlNumber").value;
       var startDay = document.getElementById("kaishi").value;
       var endDay = document.getElementById("shuryo").value;
@@ -16,7 +22,7 @@ function onClickAction() {
       } else {
          Common.setupModal("error", null, Mess.E00007, StringCS.CLOSE, null, null, false);
       }
-      
+
    }
 
    document.getElementById("backBtn").onclick = function () {
@@ -28,9 +34,13 @@ function onClickAction() {
    * ONCHANGE ACTION
 */
 function onChangeAction() {
-	document.getElementById("shuryo").onchange = function () {
-      console.log(document.getElementById("shuryo").value)
-      document.getElementById("shuryo").value = date;
+   document.getElementById("kaishi").onchange = function () {
+      if (document.getElementById("shuryo").value != "") {
+         checkValidDay();
+      }
+   }
+
+   document.getElementById("shuryo").onchange = function () {
       checkValidDay();
    }
 }
@@ -46,12 +56,78 @@ function checkValidDay() {
    }
 }
 
+/** 
+    * SETUP DATEPICKER
+*/
+function setupDatePicker() {
+   $(document).ready(function () {
+      $(function () {
+         $.datepicker.regional['jp'] = {
+            closeText: "閉じる",
+            prevText: "前",
+            nextText: "次",
+            currentText: "現在",
+            monthNames: ["- 1月", "- 2月", "- 3月", "- 4月", "- 5月", "- 6月",
+               "- 7月", "- 8月", "- 9月", "- 10月", "- 11月", "- 12月"
+            ],
+            monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月",
+               "7月", "8月", "9月", "10月", "11月", "12月"
+            ],
+            dayNames: ["日", "月", "火", "水", "木", "金", "土"],
+            dayNamesShort: ["日", "月", "火", "水", "木", "金", "土"],
+            dayNamesMin: ["日", "月", "火", "水", "木", "金", "土"],
+            dateFormat: "yy/mm/dd",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: true,
+         };
+         $.datepicker.setDefaults($.datepicker.regional['jp']);
+
+         $('#kaishi').datepicker();
+         $('#shuryo').datepicker();
+         Common.setupDatePicker("kaishi");
+         Common.setupDatePicker("shuryo");
+      });
+
+      $("#kaishi").on("change", function () {
+            var _dateStart = $(this).val();
+            var _dateEnd = $("#shuryo").val();
+            if (_dateEnd != '') {
+               if (_dateStart > _dateEnd) {
+                  Common.setupModal("info", null, Mess.I00008, null, StringCS.OK, null, false);
+                  document.getElementById("kaishi").value = dateStart;      
+               }
+            }
+
+      });
+
+      $("#kaishi").on("focus", function () {
+         dateStart = $(this).val();
+      });
+
+
+      $("#shuryo").on("change", function () {
+         var _dateEnd = $(this).val();
+         var _dateStart = $("#kaishi").val();
+         if (_dateStart > _dateEnd) {
+            Common.setupModal("info", null, Mess.I00008, null, StringCS.OK, null, false);
+            document.getElementById("shuryo").value = dateEnd;
+         }
+      });
+
+      $("#shuryo").on("focus", function () {
+         dateEnd = $(this).val();
+      });
+   });
+}
+
 /**
    * ONLOAD ACTION
 */
 function onLoadAction() {
-	onClickAction();
+   onClickAction();
    onChangeAction();
+   setupDatePicker();
 }
 
 window.onload = onLoadAction;

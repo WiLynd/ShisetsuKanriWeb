@@ -1,0 +1,21 @@
+table {
+    border: 1px solid black;
+    table-layout: fixed;
+}
+
+img {
+    border: 1px solid black;
+    padding: 1% 5%;
+    width: 100%;
+}
+
+th {
+    display: none !important;
+    border: 1px solid white;
+}
+
+td {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
