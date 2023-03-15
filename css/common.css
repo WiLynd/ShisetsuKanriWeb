@@ -67,7 +67,7 @@ body {
 }
 
 .wrap-mainform {
-	width: 1000px;
+	width: 1100px;
 	margin-top: 150px;
 	margin-bottom: 150px;
 	border-radius: 10px;
@@ -121,15 +121,16 @@ input::-webkit-inner-spin-button {
 */
 .divider-text {
 	position: relative;
-	text-align: center;
+	text-align: left;
 	margin-top: 15px;
 	margin-bottom: 15px;
-	margin-left: 15%;
-	margin-right: 15%;
+	/* margin-left: 15%;
+	margin-right: 15%; */
 	overflow: hidden;
 }
 
 .divider-text span {
+	margin-left: 5% !important;
 	padding: 7px;
 	padding-left: 4%;
 	padding-right: 4%;
@@ -186,9 +187,9 @@ input::-webkit-inner-spin-button {
 	background-color: var(--primary-color);
 }
 
-.form-control {
+/* .form-control {
 	padding: 6.75px 7px !important;
-}
+} */
 
 .text {
 	font-size: 20px !important;
@@ -263,12 +264,6 @@ input::-webkit-inner-spin-button {
 	/* transform: translateY(-4px); */
 	transform: scale(0.92);
 }
-
-.ic-btn {
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-
 
 /*
   ******  DROPDOWN MENU  ******
@@ -606,7 +601,7 @@ input::-webkit-inner-spin-button {
 */
 @media screen and (max-width: 1200px) {
 	.wrap-mainform {
-		width: 900px;
+		width: 1100px;
 	}
 }
 

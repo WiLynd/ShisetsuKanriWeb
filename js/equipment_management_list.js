@@ -6,6 +6,10 @@ import * as StringCS from "./string.js"
    * ONCLICK ACTION
 */
 function onClickAction () {
+    document.getElementById("backBtn").onclick = function () {
+        Common.movePage("/area_list.html")
+    }
+
     document.getElementById("setsubiIchiran").onclick = function () {
         Common.movePage("/equipment_detail.html")
     }
