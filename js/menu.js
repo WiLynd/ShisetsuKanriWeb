@@ -9,11 +9,11 @@ function onclickAction() {
     };
 
     document.getElementById("setsubiKanriBtn").onclick = function () { 
-        Common.movePage('/area_list.html') 
+        Common.movePage('/area_list_equipment.html') 
     };
 
     document.getElementById("nichijoTenkenBtn").onclick = function () { 
-        Common.movePage('/.html') 
+        Common.movePage('/area_list_check.html') 
     };
 }
 

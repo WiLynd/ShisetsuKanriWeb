@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Equipment management list</title>
+    <title>Daily check</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <script src="https://kit.fontawesome.com/b99c621462.js" crossorigin="anonymous"></script>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/equipment_management_list.css">
+    <link rel="stylesheet" type="text/css" href="/css/daily_check_list.css">
     <link rel="stylesheet" type="text/css" href="/css/modal.css">
     <link rel="stylesheet" type="text/css" href="/css/util.css">
 </head>
@@ -21,10 +21,10 @@
         <div class="container-mainform">
             <div class="wrap-mainform">
                 <span id="titleForm">
-                    エリア一覧
+                    点検項目一覧
                 </span>
                 <p class="divider-text">
-                    <span class="title-group">板金加工エリア</span>
+                    <span class="title-group">溶接加工エリア　＞　ガス溶接機</span>
                 </p>
 
                 <div class="row content">
@@ -34,11 +34,17 @@
                                 <th class="col-1">
                                     No.
                                 </th>
-                                <th class="col-3">
+                                <th class="col-２">
                                     管理番号
                                 </th>
-                                <th class="col-6">
-                                    管理項目
+                                <th class="col-2">
+                                    分類
+                                </th>
+                                <th class="col-3">
+                                    点検内容
+                                </th>
+                                <th class="col-2">
+                                    点検結果
                                 </th>
                                 <th class="col-2">
                                     備考
@@ -49,14 +55,25 @@
                                     1
                                 </td>
                                 <td class="text">
-                                    SP1-01
+                                    WP1CK01
                                 </td>
                                 <td class="text">
-                                    折り曲げ機
+                                    外観検査
+                                </td>
+                                <td class="text">
+                                    ホース継手台およびパイプにひび割れや腐食はないか？
+                                </td>
+                                <td class="text ta-c">
+                                    <div class="can-toggle can-toggle--size-large">
+                                        <input id="a" type="checkbox">
+                                        <label for="a">
+                                          <div class="can-toggle__switch" data-checked="はい" data-unchecked="いいえ"></div>
+                                        </label>
+                                      </div>
                                 </td>
                                 <td>
-                                    <button>
-                                        <!-- <i class="fa-regular fa-pen-to-square"></i> -->
+                                    <button class="btn btn-default detail-btn">
+                                        詳細
                                     </button>
                                 </td>
                             </tr>
@@ -65,115 +82,67 @@
                                     2
                                 </td>
                                 <td class="text">
-                                    SP1-02
+                                    WP1CK02
                                 </td>
                                 <td class="text">
-                                    レーザー加工機
+                                    外観検査
                                 </td>
                                 <td>
-                                    <!-- <i class="fa-regular fa-pen-to-square"></i> -->
-                                </td>
-                            </tr>
-                            <tr class="text text-center">
-                                <td class="text">
-                                    3
-                                </td>
-                                <td class="text">
-                                    SP1-03
-                                </td>
-                                <td class="text">
-                                    卓上ボール盤
+                                    バルブなどに損傷はないか？
                                 </td>
                                 <td>
-                                    <!-- <i class="fa-regular fa-pen-to-square"></i> -->
-                                </td>
-                            </tr>
-                            <tr class="text text-center">
-                                <td class="text">
-                                    4
-                                </td>
-                                <td class="text">
-                                    SP1-04
-                                </td>
-                                <td class="text">
-                                    折り曲げ機
+                                    <div class="can-toggle can-toggle--size-large">
+                                        <input id="b" type="checkbox">
+                                        <label for="b">
+                                          <div class="can-toggle__switch" data-checked="はい" data-unchecked="いいえ"></div>
+                                        </label>
+                                      </div>
                                 </td>
                                 <td>
-                                    <button>
-                                        <!-- <i class="fa-regular fa-pen-to-square"></i> -->
+                                    <button class="btn btn-default detail-btn">
+                                        詳細
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text text-center">
                                 <td class="text">
-                                    5
+                                    ...
                                 </td>
                                 <td class="text">
-                                    SP1-05
+                                    ...
                                 </td>
                                 <td class="text">
-                                    レーザー加工機
+                                    ...
                                 </td>
-                                <td>
-                                    <!-- <i class="fa-regular fa-pen-to-square"></i> -->
-                                </td>
+                                <td class="text">...</td>
+                                <td class="text">...</td>
+                                <td class="text">...</td>
                             </tr>
                             <tr class="text text-center">
                                 <td class="text">
-                                    7
+                                    n
                                 </td>
                                 <td class="text">
-                                    SP1-03
+                                    WP1CK0n
                                 </td>
                                 <td class="text">
-                                    卓上ボール盤
+                                    火炎の状態
+                                </td>
+                                <td class="text">
+                                    切断酸素気流は正常か？
                                 </td>
                                 <td>
-                                    <!-- <i class="fa-regular fa-pen-to-square"></i> -->
-                                </td>
-                            </tr>
-                            <tr class="text text-center">
-                                <td class="text">
-                                    8
-                                </td>
-                                <td class="text">
-                                    SP1-01
-                                </td>
-                                <td class="text">
-                                    折り曲げ機
+                                    <div class="can-toggle can-toggle--size-large">
+                                        <input id="c" type="checkbox">
+                                        <label for="c">
+                                          <div class="can-toggle__switch" data-checked="はい" data-unchecked="いいえ"></div>
+                                        </label>
+                                      </div>
                                 </td>
                                 <td>
-                                    <button>
-                                        <!-- <i class="fa-regular fa-pen-to-square"></i> -->
+                                    <button class="btn btn-default detail-btn">
+                                        詳細
                                     </button>
-                                </td>
-                            </tr>
-                            <tr class="text text-center">
-                                <td class="text">
-                                    9
-                                </td>
-                                <td class="text">
-                                    SP1-02
-                                </td>
-                                <td class="text">
-                                    レーザー加工機
-                                </td>
-                                <td>
-                                    <!-- <i class="fa-regular fa-pen-to-square"></i> -->
-                                </td>
-                            </tr>
-                            <tr class="text text-center">
-                                <td class="text">
-                                    10
-                                </td>
-                                <td class="text">
-                                    SP1-03
-                                </td>
-                                <td class="text">
-                                    卓上ボール盤
-                                </td>
-                                <td>
-                                    <!-- <i class="fa-regular fa-pen-to-square"></i> -->
                                 </td>
                             </tr>
                         </table>
@@ -197,6 +166,20 @@
             </div>  
         </div>
     </div>
-    <script type="module" src="./js/equipment_management_list.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+		integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+    <script type="module" src="./js/daily_check_list.js"></script>
 </body>
 </html>

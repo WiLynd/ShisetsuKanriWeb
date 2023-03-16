@@ -7,11 +7,11 @@ import * as StringCS from "./string.js"
 */
 function onClickAction () {
     document.getElementById("backBtn").onclick = function () {
-        Common.movePage("/area_list_equipment.html")
+        Common.movePage("/area_list_check.html")
     }
 
     document.getElementById("setsubiIchiran").onclick = function () {
-        Common.movePage("/equipment_detail.html")
+        Common.movePage("/daily_check_list.html")
     }
 }
 

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Memo</title>
+    <title>Equipment daily check detail</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <script src="https://kit.fontawesome.com/b99c621462.js" crossorigin="anonymous"></script>
@@ -12,11 +11,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/memo.css">
+    <link rel="stylesheet" type="text/css" href="/css/equipment_daily_check_detail.css">
     <link rel="stylesheet" type="text/css" href="/css/modal.css">
     <link rel="stylesheet" type="text/css" href="/css/util.css">
 </head>
-
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
@@ -29,7 +27,7 @@
                     <span class="title-group">板金加工エリア　＞　折り曲げ機</span>
                 </p>
 
-                <div class="row content ed-v">
+                <div class="row content ed-v" style="align-items: normal">
                     <div class="col-6">
                         <div class="row content ed-v">
                             <div class="col-12">
@@ -44,45 +42,21 @@
                             </div>
                         </div>
 
-                        <div class="row content ed-v">
-                            <div class="col-12">
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">メーカー
-                                        </span>
-                                    </div>
-    
-                                    <input type="text" class="form-control ta-l text t-ip"
-                                        id="maker" disabled/>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="row content ed-v confirmRow">
+                            <div class="col-9">
 
-                        <div class="row content ed-v">
-                            <div class="col-12">
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">購入日
-                                        </span>
-                                    </div>
-    
                                     <input type="text" class="form-control ta-l text t-ip"
-                                        id="purchaseDate" disabled/>
-                                </div>
-                            </div>
-                        </div>
+                                        id="confirm" disabled/>
 
-                        <div class="row content ed-v">
-                            <div class="col-12">
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">管理責任者
-                                        </span>
-                                    </div>
-    
-                                    <input type="text" class="form-control ta-l text t-ip"
-                                        id="administrator" disabled/>
-                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="can-toggle can-toggle--size-large">
+                                    <input id="b" type="checkbox">
+                                    <label for="b">
+                                      <div class="can-toggle__switch" data-checked="はい" data-unchecked="いいえ"></div>
+                                    </label>
+                                  </div>
                             </div>
                         </div>
 
@@ -95,7 +69,7 @@
                                     </div>
     
                                     <input type="text" class="form-control ta-l text t-ip"
-                                        id="title"/>
+                                        id="comment"/>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +86,7 @@
                     <div class="col-6" id="memoImg">
                         <div class="row content">
                             <div class="col-6 memo-img-l">
-                                &nbsp;
+                                <img src="./imgs/mc-02.jpg" alt="">
                             </div>
 
                             <div class="col-6 memo-img-r">
@@ -160,8 +134,18 @@
         </div>
     </div>
 
-    <script type="module" src="./js/memo.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+		integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <script type="module" src="./js/equipment_daily_check_detail.js"></script>
 </body>
-
 </html>

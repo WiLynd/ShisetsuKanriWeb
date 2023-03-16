@@ -23,6 +23,10 @@ function onClickAction() {
    document.getElementById("memoBtn").onclick = function () {
       Common.movePage("/memo.html")
    }
+   
+   document.getElementById("torokuBtn").onclick = function () {
+      Common.movePage("/menu.html")
+   }
 }
 
 /**

@@ -6,14 +6,21 @@ import * as StringCS from "./string.js"
    * ONCLICK ACTION
 */
 function onClickAction () {
+    // document.getElementById("eriaIchiran").onclick = function () {
+    //     Common.movePage("/equipment_management_list.html")
+    // }
+
     document.getElementById("backBtn").onclick = function () {
-        Common.movePage("/area_list_equipment.html")
+        Common.movePage("/menu.html")
     }
 
-    document.getElementById("setsubiIchiran").onclick = function () {
-        Common.movePage("/equipment_detail.html")
-    }
+    $('#eriaIchiran').on('click', 'tbody tr', function() {
+        Common.movePage("/equipment_daily_check_list.html");
+    })
+      
 }
+
+
 
 /*
    * ONLOAD ACTION

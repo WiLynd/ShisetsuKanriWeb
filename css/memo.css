@@ -1,0 +1,26 @@
+#kontentsu {
+    width: 100%;
+    min-height: 300px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ced4da;
+    margin-bottom: 20px;
+}
+
+.memo-img-l {
+    width: 100% !important;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ced4da;
+    height: 150px !important;
+    margin: 0 5px 10px -5px;
+}
+
+.memo-img-r {
+    width: 100% !important;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ced4da;
+    height: 150px !important;
+    margin: 0 -5px 10px 5px;
+}

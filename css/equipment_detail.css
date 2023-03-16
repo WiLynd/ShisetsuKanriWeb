@@ -39,7 +39,7 @@ td {
     margin-left: 5% !important;
 }
 
-.detail-btn {
+.memo-btn {
     position: relative;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
@@ -48,7 +48,7 @@ td {
     margin: 0 0 0 5px;
 }
 
-.memo-btn {
+.detail-btn {
     width: auto;
     margin-right: 0;
 }
