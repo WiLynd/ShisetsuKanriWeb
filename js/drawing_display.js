@@ -14,31 +14,11 @@ const drawingList = [
    [10, "23-01110010", "送風機ファン10 (〇〇株式会社)", ""],
 ];
 
-
-/**
-   * GENERATE TABLE
-*/
-function generateTable(listItem, tableName) {
-	const table = document.getElementById(tableName);
-	
-    for (let i = 0; i < listItem.length; i++) {
-      const row = document.createElement("tr");
-		const cell = document.createElement("td");
-		var span = document.createElement("span");
-      span.id = "span_" + i;
-		span.classList.add("text");
-		span.textContent = "";
-		cell.appendChild(span);
-		row.appendChild(cell);
-		table.appendChild(row);
-    }
-}
-
 /**
    * ONCLICK ACTION
 */
 function onClickAction() {
-	document.getElementById("backBtn").onclick = function () {
+   document.getElementById("backBtn").onclick = function () {
       Common.movePage("/drawing_search.html")
    }
 }
@@ -48,8 +28,8 @@ function onClickAction() {
    * ONLOAD ACTION
 */
 function onLoadAction() {
-	onClickAction();
-   console.log(drawingList)
+   onClickAction();
+   Common.generateTable(drawingList,"zumenHyoji")
 }
 
 window.onload = onLoadAction;

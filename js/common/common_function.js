@@ -1,6 +1,29 @@
 import * as StringCS from "./string.js";
 import * as Mess from "./message.js"
 
+/**
+   * GENERATE TABLE
+*/
+function generateTable(listItem, tableName) {
+    const table = document.getElementById(tableName);
+    const tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+    for (let i = 0; i < listItem.length; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < listItem[i].length; j++) {
+            const cell = document.createElement("td");
+            var span = document.createElement("span");
+            span.textContent = listItem[i][j];
+            cell.appendChild(span);
+            cell.classList.add("text");
+            cell.classList.add("text-center");
+            row.appendChild(cell);
+        }
+        tbody.appendChild(row);
+    }
+}
+
+
 /** 
    * BACK ACTION
 */
@@ -116,5 +139,5 @@ function setupDatePicker(nameDatePicker) {
 }
 
 export {
-    backAction, setupModal, movePage, setupDatePicker
+    backAction, setupModal, movePage, setupDatePicker, generateTable
 }
