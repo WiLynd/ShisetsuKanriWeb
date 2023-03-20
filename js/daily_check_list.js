@@ -1,6 +1,4 @@
-import * as Common from "./common_function.js"
-import * as Mess from "./message.js"
-import * as StringCS from "./string.js"
+import * as Common from "./common/common_function.js"
 
 /*
    * ONCLICK ACTION

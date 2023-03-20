@@ -1,4 +1,4 @@
-import * as Common from "./common_function.js"
+import * as Common from "./common/common_function.js"
 
 /**
    * ONCLICK ACTION

@@ -1,6 +1,4 @@
-import * as Common from "./common_function.js"
-import * as Mess from "./message.js"
-import * as StringCS from "./string.js"
+import * as Common from "./common/common_function.js"
 
 /*
    * ONCLICK ACTION
@@ -11,7 +9,12 @@ function onClickAction () {
     }
     
     $('#eriaIchiran').on('click', 'tbody tr', function() {
-        Common.movePage("/equipment_management_list.html")
+
+            var row = $(this).closest("tr");
+            // var rowId = row.attr("id");
+             console.log(row[0].innerText);
+
+        // Common.movePage("/equipment_management_list.html")
     })
       
 }

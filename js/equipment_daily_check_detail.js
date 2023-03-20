@@ -1,4 +1,4 @@
-import * as Common from "./common_function.js"
+import * as Common from "./common/common_function.js"
 
 /**
    * SET DATA ACTION
@@ -7,8 +7,8 @@ function setDataDetail() {
     document.getElementById("controlNumber").value = "WP1CK01";
     document.getElementById("confirm").value = "バルブなどに損傷はないか？";
     document.getElementById("comment").value = "溶接機から異音あり";
-    document.getElementById("kontentsu").value = "調整器から小さく「シューシュー」という音が聞こえる" +
-        "ここのところガスの減りが速い気がしていた。" +
+    document.getElementById("kontentsu").value = "調整器から小さく「シューシュー」という音が聞こえる \n" + 
+        "ここのところガスの減りが速い気がしていた。\n" +
         "日常点検をした方がよいかもしれない。";
 }
 
@@ -20,7 +20,7 @@ function onClickAction() {
         Common.movePage("/daily_check_list.html")
     }
 
-    document.getElementById("torokuBtn").onclick = function () {
+    document.getElementById("memoTsuikaBtn").onclick = function () {
         Common.movePage("/menu.html")
     }
 }

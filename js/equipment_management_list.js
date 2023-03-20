@@ -1,6 +1,4 @@
-import * as Common from "./common_function.js"
-import * as Mess from "./message.js"
-import * as StringCS from "./string.js"
+import * as Common from "./common/common_function.js"
 
 /*
    * ONCLICK ACTION
@@ -10,7 +8,7 @@ function onClickAction () {
         Common.movePage("/area_list_equipment.html")
     }
 
-    document.getElementById("setsubiIchiran").onclick = function () {
+    document.getElementById("bankinKakoEria").onclick = function () {
         Common.movePage("/equipment_detail.html")
     }
 }

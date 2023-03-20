@@ -1,6 +1,6 @@
-import * as Common from "./common_function.js"
-import * as Mess from "./message.js"
-import * as StringCS from "./string.js"
+import * as Common from "./common/common_function.js"
+import * as Mess from "./common/message.js"
+import * as StringCS from "./common/string.js"
 
 /**
    * VARIABLE
@@ -12,7 +12,7 @@ var dateEnd = null;
    * ONCLICK ACTION
 */
 function onClickAction() {
-   document.getElementById("ichiranHyojiBtn").onclick = function () {
+   document.getElementById("zumenKensakuBtn").onclick = function () {
       var controlNumber = document.getElementById("controlNumber").value;
       var startDay = document.getElementById("kaishi").value;
       var endDay = document.getElementById("shuryo").value;

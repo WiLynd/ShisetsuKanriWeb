@@ -1,4 +1,4 @@
-import * as Common from "./common_function.js"
+import * as Common from "./common/common_function.js"
 
 /**
    * SET DATA ACTION
@@ -18,7 +18,7 @@ function onClickAction() {
       Common.movePage("/equipment_detail.html")
    }
 
-   document.getElementById("torokuBtn").onclick = function () {
+   document.getElementById("memoTsuikaBtn").onclick = function () {
       Common.movePage("/menu.html")
    }
 }
