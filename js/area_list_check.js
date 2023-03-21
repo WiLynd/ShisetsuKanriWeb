@@ -16,6 +16,7 @@ function onClickAction () {
     }
 
     $('#eriaIchiran').on('click', 'tbody tr', function() {
+        sessionStorage.setItem("area",areaList[this.id][2]);
         Common.movePage("/equipment_daily_check_list.html");
     })
       

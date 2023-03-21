@@ -21,10 +21,12 @@ function onClickAction () {
     document.getElementById("backBtn").onclick = function () {
         Common.movePage("/area_list_equipment.html")
     }
-
-    document.getElementById("bankinKakoEria").onclick = function () {
+    
+    $('#bankinKakoEria').on('click', 'tbody tr', function() {
+        sessionStorage.setItem("equipmentName",equipmentList[this.id][1]);
+        sessionStorage.setItem("item",equipmentList[this.id][2]);
         Common.movePage("/equipment_detail.html")
-    }
+    })
 }
 
 /*
@@ -32,7 +34,8 @@ function onClickAction () {
 */
 function onLoadAction() {
     onClickAction();
-    Common.generateTable(equipmentList,"bankinKakoEria")
+    Common.generateTable(equipmentList,"bankinKakoEria");
+    document.getElementById("title").innerHTML = sessionStorage.getItem("area");
 }
 
 window.onload = onLoadAction;

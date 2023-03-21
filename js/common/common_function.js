@@ -19,6 +19,7 @@ function generateTable(listItem, tableName) {
             cell.classList.add("text-center");
             row.appendChild(cell);
         }
+        row.id = i;
         tbody.appendChild(row);
     }
 }

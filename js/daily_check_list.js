@@ -60,6 +60,7 @@ function generateTable(listItem) {
                     row.appendChild(cell);
                 }       
                 else {
+                    button.id = i;
                     button.append("詳細");
                     button.classList.add("btn");
                     button.classList.add("btn-default");
@@ -69,7 +70,7 @@ function generateTable(listItem) {
                 }         
             }
         }
-        
+        row.id = i;
         tbody.appendChild(row);
     }
 }
@@ -87,7 +88,9 @@ function onClickAction() {
     }
 
     $('#setsubiIchiran').on('click', 'tbody tr td button', function () {
-        Common.movePage("/equipment_daily_check_detail.html")
+        sessionStorage.setItem("inspectionDetail",dailyCheckList[this.id][3]);
+        sessionStorage.setItem("controlNumber",dailyCheckList[this.id][1]);
+        Common.movePage("/equipment_daily_check_detail.html");
     })
 }
 
@@ -96,7 +99,8 @@ function onClickAction() {
 */
 function onLoadAction() {
     onClickAction();
-    generateTable(dailyCheckList)
+    generateTable(dailyCheckList);
+    document.getElementById("title").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
 }
 
 window.onload = onLoadAction;

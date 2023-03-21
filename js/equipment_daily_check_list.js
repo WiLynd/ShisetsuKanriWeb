@@ -22,9 +22,10 @@ function onClickAction () {
         Common.movePage("/area_list_check.html")
     }
 
-    document.getElementById("setsubiIchiran").onclick = function () {
+    $('#setsubiIchiran').on('click', 'tbody tr', function() {
+        sessionStorage.setItem("item",equipmentDailyCheckList[this.id][2]);
         Common.movePage("/daily_check_list.html")
-    }
+    })
 }
 
 /*
@@ -33,6 +34,7 @@ function onClickAction () {
 function onLoadAction() {
     onClickAction();
     Common.generateTable(equipmentDailyCheckList,"setsubiIchiran")
+    document.getElementById("title").innerHTML = sessionStorage.getItem("area");
 }
 
 window.onload = onLoadAction;

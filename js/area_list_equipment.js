@@ -14,8 +14,9 @@ function onClickAction () {
     document.getElementById("backBtn").onclick = function () {
         Common.movePage("/menu.html")
     }
-    
+
     $('#eriaIchiran').on('click', 'tbody tr', function() {
+        sessionStorage.setItem("area",areaList[this.id][2]);
         Common.movePage("/equipment_management_list.html")
     })
       

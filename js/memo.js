@@ -4,7 +4,7 @@ import * as Common from "./common/common_function.js"
    * SET DATA ACTION
 */
 function setDataDetail() {
-   document.getElementById("controlNumber").value = "SP1-01";
+   document.getElementById("controlNumber").value = sessionStorage.getItem("equipmentName");
    document.getElementById("maker").value = "A社";
    document.getElementById("purchaseDate").value = "2019年7月1日";
    document.getElementById("administrator").value = "Nguyen Van Dung";
