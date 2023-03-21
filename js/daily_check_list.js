@@ -1,5 +1,6 @@
 import * as Common from "./common/common_function.js"
 import * as StringCS from "./common/string.js"
+import * as Mess from "./common/message.js"
 
 /*****  VIEW VARIABLE  *****/
 const dailyCheckList = [
@@ -25,11 +26,11 @@ function generateTable(listItem) {
             var label = document.createElement("label");
             var button = document.createElement("button");
             if (j < listItem[i].length - 2) {    
-                if ( j == listItem[i].length-3) {
-                    cell.onclick = function () {
-                        Common.setupModal("info", null,listItem[i][j], null, StringCS.OK, null, false);
-                    }
-                } 
+                // if ( j == listItem[i].length-3) {
+                //     cell.onclick = function () {
+                //         Common.setupModal("info", null,listItem[i][j], null, StringCS.OK, null, false);
+                //     }
+                // } 
                 span.textContent = listItem[i][j];
                 cell.appendChild(span);
                 cell.classList.add("text-center");
@@ -61,10 +62,11 @@ function generateTable(listItem) {
                 }       
                 else {
                     button.id = i;
-                    button.append("詳細");
+                    button.append("編集");
                     button.classList.add("btn");
                     button.classList.add("btn-default");
                     button.classList.add("detail-btn");
+                    button.classList.add("text");
                     cell.appendChild(button);
                     row.appendChild(cell);
                 }         
@@ -84,10 +86,14 @@ function onClickAction() {
     }
 
     document.getElementById("torokuBtn").onclick = function () {
-        Common.movePage("/menu.html")
+        Common.setupModal("success", null, Mess.I00003, null, StringCS.OK, null, false);
+        document.getElementById("buttonAreaModal").onclick = function () {
+            Common.movePage("/equipment_daily_check_list.html");
+        }
     }
 
     $('#setsubiIchiran').on('click', 'tbody tr td button', function () {
+        sessionStorage.setItem("status",dailyCheckList[this.id][4]);
         sessionStorage.setItem("inspectionDetail",dailyCheckList[this.id][3]);
         sessionStorage.setItem("controlNumber",dailyCheckList[this.id][1]);
         Common.movePage("/equipment_daily_check_detail.html");

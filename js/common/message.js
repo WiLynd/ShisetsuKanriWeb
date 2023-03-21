@@ -8,7 +8,7 @@ export var I00001 = "しばらくお待ちください。。。"
 // Saving data...
 export var I00002 = "データを保存しています。。。"
 // データ保存に成功しました。
-// Data saved successfully.
+// Data saved successfully. 
 export var I00003 = "データ保存に成功しました。"
 // この機能は開発中です。
 // This feature is under development.

@@ -44,24 +44,22 @@
                             </div>
                         </div>
 
-                        <div class="row content ed-v confirmRow">
-                            <div class="col-9">
-
-                                <input type="text" class="form-control ta-l text t-ip" id="confirm" disabled />
-
+                        <div class="row content confirmRow">
+                            <div class="col-9" id="confirm">
                             </div>
 
                             <div class="col-3">
+
                                 <div class="can-toggle can-toggle--size-large">
-                                    <input id="b" type="checkbox">
-                                    <label for="b">
+                                    <input id="status" type="checkbox">
+                                    <label for="status">
                                         <div class="can-toggle__switch" data-checked="はい" data-unchecked="いいえ"></div>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row content ed-v m-t-15">
+                        <div class="row content ed-v m-t-20">
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
@@ -88,13 +86,15 @@
                             </div>
 
                             <div class="col-6 memo-img-r">
-                                &nbsp;
+                                <div class="wrapper">
+                                    <button class="no-image" id="img-result"></button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row content">
                             <div class="col-6 memo-img-l">
-                                &nbsp;
+
                             </div>
 
                             <div class="col-6 memo-img-r">
@@ -157,6 +157,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+        (function () {
+            var uploader = document.createElement('input'),
+                image = document.getElementById('img-result');
+
+            uploader.type = 'file';
+            uploader.accept = 'image/*';
+
+            image.onclick = function () {
+                uploader.click();
+            }
+
+            uploader.onchange = function () {
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    image.classList.remove('no-image');
+                    image.style.backgroundImage = 'url(' + evt.target.result + ')';
+                    var request = {
+                        itemtype: 'test 1',
+                        brand: 'test 2',
+                        images: [{
+                            data: evt.target.result
+                        }]
+                    };
+                }
+                reader.readAsDataURL(uploader.files[0]);
+            }
+        })();
+    </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">

@@ -44,7 +44,7 @@
                                             </span>
                                         </div>
         
-                                        <button type="button" class="btn btn-default memo-btn">
+                                        <button type="button" class="btn btn-default text memo-btn">
                                             点検開始
                                         </button>
                                     </div>
@@ -153,34 +153,11 @@
                 <div class="row content ed-v m-t-20">
                     <div class="col-12">
                         <table class="table" id="memoTable">
-                            <tbody>
-                                <tr>
-                                    <td class="col-3 text"> 
-                                        2020年1月10日
-                                    </td>
-                                    <td class="col-9 text">
-                                        異音がしたため確認したが目立った…
-                                    </td>
-                                    <td class="col-2">
-                                        <button class="btn btn-default detail-btn">
-                                            詳細
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-2 text">
-                                        2021年11月22日
-                                    </td>
-                                    <td class="col-9 text">
-                                        ベアリング交換
-                                    </td>
-                                    <td class="col-2">
-                                        <button class="btn btn-default detail-btn">
-                                            詳細
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr hidden>
+                                <td class="col-2"></td>
+                                <td class="col-9"></td>
+                                <td class="col-1"></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -202,8 +179,47 @@
                 </div>
 
             </div>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Modal image area -->
+                    <div class="modal-image-area background-error-modal">
+                        <span class="modal-close-button">X</span>
+                        <img id="imgStatusModal" class="modal-image">
+                    </div>
+
+                    <!-- Modal message area -->
+                    <div class="modal-message">
+                        <div class="modal-message-area">
+                            <span class="title-modal text">題名</span>
+                            <span class="modal-message-detail text">メッセージ</span>
+                        </div>
+
+                        <div id="buttonAreaModal">
+                            <button class="button-modal btn-common button-0" role="button"></button>
+                            <button class="button-modal btn-common button-1" role="button"></button>
+                            <button class="button-modal btn-common button-2" role="button"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+		integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 
     <script type="module" src="./js/equipment_detail.js"></script>
 </body>
