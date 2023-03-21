@@ -25,41 +25,49 @@ function generateTable(listItem) {
             var input = document.createElement("input");
             var label = document.createElement("label");
             var button = document.createElement("button");
-            if (j < listItem[i].length - 2) {    
-                // if ( j == listItem[i].length-3) {
-                //     cell.onclick = function () {
-                //         Common.setupModal("info", null,listItem[i][j], null, StringCS.OK, null, false);
-                //     }
-                // } 
-                span.textContent = listItem[i][j];
-                cell.appendChild(span);
-                cell.classList.add("text-center");
-                cell.classList.add("text");
-                row.appendChild(cell);
+            if (j < listItem[i].length - 2) {
+                if (j != listItem[i].length - 3) {
+                    //     cell.onclick = function () {
+                    //         Common.setupModal("info", null,listItem[i][j], null, StringCS.OK, null, false);
+                    //     }
+                    span.textContent = listItem[i][j];
+                    cell.appendChild(span);
+                    cell.classList.add("text-center");
+                    cell.classList.add("text");
+                    row.appendChild(cell);
+                }
+                else {
+                    span.textContent = listItem[i][j];
+                    cell.appendChild(span);
+
+                    cell.classList.add("text");
+                    row.appendChild(cell);
+                }
+
             }
             else {
                 if (j == listItem[i].length - 2) {
                     var divLabel = document.createElement("div");
                     divLabel.classList.add("can-toggle__switch");
-                    divLabel.setAttribute("data-checked","はい");
-                    divLabel.setAttribute("data-unchecked","いいえ");
+                    divLabel.setAttribute("data-checked", "はい");
+                    divLabel.setAttribute("data-unchecked", "いいえ");
                     if (listItem[i][j] == "はい") {
                         label.appendChild(divLabel);
                     }
                     else {
-                        input.setAttribute("checked","");
+                        input.setAttribute("checked", "");
                         label.appendChild(divLabel);
                     }
-                    label.setAttribute("for",listItem[i][0])
-                    input.setAttribute("id",listItem[i][0]);
-                    input.setAttribute("type","checkbox");
+                    label.setAttribute("for", listItem[i][0])
+                    input.setAttribute("id", listItem[i][0]);
+                    input.setAttribute("type", "checkbox");
                     div.classList.add("can-toggle");
                     div.classList.add("can-toggle--size-large");
                     cell.appendChild(div);
                     div.appendChild(input);
                     div.appendChild(label);
                     row.appendChild(cell);
-                }       
+                }
                 else {
                     button.id = i;
                     button.append("編集");
@@ -69,7 +77,7 @@ function generateTable(listItem) {
                     button.classList.add("text");
                     cell.appendChild(button);
                     row.appendChild(cell);
-                }         
+                }
             }
         }
         row.id = i;
@@ -93,9 +101,9 @@ function onClickAction() {
     }
 
     $('#setsubiIchiran').on('click', 'tbody tr td button', function () {
-        sessionStorage.setItem("status",dailyCheckList[this.id][4]);
-        sessionStorage.setItem("inspectionDetail",dailyCheckList[this.id][3]);
-        sessionStorage.setItem("controlNumber",dailyCheckList[this.id][1]);
+        sessionStorage.setItem("status", dailyCheckList[this.id][4]);
+        sessionStorage.setItem("inspectionDetail", dailyCheckList[this.id][3]);
+        sessionStorage.setItem("controlNumber", dailyCheckList[this.id][1]);
         Common.movePage("/equipment_daily_check_detail.html");
     })
 }

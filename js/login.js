@@ -11,7 +11,7 @@ const modal = document.getElementById("myModal");
 */
 function login() {
     let password = document.getElementById("pass"); 
-    if (password.value === "") {
+    if (password.value == "") {
         Common.setupModal("error", null, Mess.E00007, StringCS.CLOSE, null, null, false);
     } else {
         Common.setupModal("load", null, Mess.I00001, null, null, null, false);
@@ -25,7 +25,7 @@ function login() {
    * @param password     [INT]
 */
 function checkUser(password) {
-    if (password == 1) {
+    if (password != "") {
         Common.movePage("/menu.html")
     }
     else {
