@@ -13,7 +13,7 @@ table, tr, td {
 }
 
 table th {
-    border: 1px solid black !important;
+    border: 2px solid black !important;
     background-color: #a1735c !important;
     color: white;
 }

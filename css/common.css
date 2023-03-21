@@ -92,6 +92,10 @@ form {
 	align-items: center;
 }
 
+.table {
+    max-width: none;
+}
+
 #keyboardTable {
 	display: table;
 	border: none;
@@ -109,10 +113,12 @@ form {
 	position: relative;
 }
 
+
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-	/* -webkit-appearance: none; */
+	-webkit-appearance: none;
 	margin: 0;
 }
 
