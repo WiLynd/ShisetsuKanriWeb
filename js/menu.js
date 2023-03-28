@@ -4,6 +4,10 @@ import * as Common from "./common/common_function.js"
    * ONCLICK ACTION
 */
 function onclickAction() {
+    document.getElementById("logoutOption").onclick = function () {
+        Common.movePage('login.html')
+    }
+
     document.getElementById("zumenKakuninBtn").onclick = function () { 
         Common.movePage('/drawing_search.html') 
     };

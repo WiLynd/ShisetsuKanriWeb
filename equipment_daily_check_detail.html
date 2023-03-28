@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" href="./imgs/icons/ic-detail.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <script src="https://kit.fontawesome.com/b99c621462.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,12 +15,27 @@
     <link rel="stylesheet" type="text/css" href="/css/equipment_daily_check_detail.css">
     <link rel="stylesheet" type="text/css" href="/css/modal.css">
     <link rel="stylesheet" type="text/css" href="/css/util.css">
+    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.css">
 </head>
 
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
-            <div class="wrap-mainform m-t-20">
+			<div class="dropdown select-role">
+				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					<span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
+				</div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
+                    <li>
+                        <a class="dropdown-item scan-page" id="logoutOption">
+                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                        </a>
+                    </li>
+                </ul>
+			</div>
+
+            <div class="wrap-mainform">
                 <span id="titleForm">
                     メモ追加
                 </span>
@@ -158,37 +172,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        (function () {
-            var uploader = document.createElement('input'),
-                image = document.getElementById('img-result');
-
-            uploader.type = 'file';
-            uploader.accept = 'image/*';
-
-            image.onclick = function () {
-                uploader.click();
-            }
-
-            uploader.onchange = function () {
-                var reader = new FileReader();
-                reader.onload = function (evt) {
-                    image.classList.remove('no-image');
-                    image.style.backgroundImage = 'url(' + evt.target.result + ')';
-                    var request = {
-                        itemtype: 'test 1',
-                        brand: 'test 2',
-                        images: [{
-                            data: evt.target.result
-                        }]
-                    };
-                }
-                reader.readAsDataURL(uploader.files[0]);
-            }
-        })();
-    </script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -198,9 +181,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
         integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
+    <script src="fonts/fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./js/equipment_daily_check_detail.js"></script>
 </body>
 

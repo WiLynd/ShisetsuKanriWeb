@@ -63,6 +63,10 @@ function generateTable(listItem, tableName) {
    * ONCLICK ACTION
 */
 function onClickAction() {
+   document.getElementById("logoutOption").onclick = function () {
+      Common.movePage('login.html')
+  }
+  
    document.getElementById("backBtn").onclick = function () {
       Common.movePage("/equipment_management_list.html")
    }

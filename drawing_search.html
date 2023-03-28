@@ -15,11 +15,26 @@
     <link rel="stylesheet" type="text/css" href="/css/drawing_search.css">
     <link rel="stylesheet" type="text/css" href="/css/modal.css">
     <link rel="stylesheet" type="text/css" href="/css/util.css">
+    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.css">
 </head>
 
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
+			<div class="dropdown select-role">
+				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					<span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
+				</div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
+                    <li>
+                        <a class="dropdown-item scan-page" id="logoutOption">
+                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                        </a>
+                    </li>
+                </ul>
+			</div>
+
             <div class="wrap-mainform p-t-30">
                 <span id="titleForm">
                     図面検索
@@ -50,7 +65,7 @@
 
                                 <!-- <input type="text" class="form-control ta-l text t-ip ta-r" id="kaishi"/> -->
                                 <input type="text" class="form-control text ta-c" id="kaishi"
-                                data-date-format="yyyy/mm/dd" data-language='en'>
+                                    data-date-format="yyyy/mm/dd" data-language='en'>
                             </div>
                         </div>
 
@@ -66,12 +81,12 @@
                                                 終了
                                             </span>
                                         </div>
-        
-                                        <input type="text" class="form-control ta-l text t-ip ta-r" id="shuryo"/>
+
+                                        <input type="text" class="form-control ta-l text t-ip ta-r" id="shuryo" />
                                     </div>
                                 </div>
                             </div>
-                        
+
                         </div>
 
                     </div>
@@ -84,12 +99,9 @@
                                 </div>
 
                                 <select class="custom-select combobox text t-ip" id="cbb_productType">
-                                    <option value="0">マネジャー</option>
-                                    <option value="1">課長</option>
-                                    <option value="2">リーダー</option>
-                                    <option value="3">副チームリーダー</option>
-                                    <option value="4">ワーカー</option>
-                                    <option value="5">品質管理スタッフ</option>
+                                    <option value="0">送風機</option>
+                                    <option value="1">フィルター</option>
+                                    <option value="2">原動機</option>
                                     <option value="-" selected hidden></option>
                                 </select>
                             </div>
@@ -142,17 +154,11 @@
         </div>
     </div>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" type="text/css"
-		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
-		integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+        integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendor/jquery/jquery-ui-1.12.1.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./js/drawing_search.js"></script>
 </body>
 

@@ -12,17 +12,12 @@ var dateEnd = null;
    * ONCLICK ACTION
 */
 function onClickAction() {
-   document.getElementById("zumenKensakuBtn").onclick = function () {
-      // var controlNumber = document.getElementById("controlNumber").value;
-      // var startDay = document.getElementById("kaishi").value;
-      // var endDay = document.getElementById("shuryo").value;
-      // var productType = document.getElementById("cbb_productType").value;
-      // if ((controlNumber != "") && (startDay != "") && (endDay != "") && (productType != "-")) {
-         Common.movePage("/drawing_display.html")
-      // } else {
-      //    Common.setupModal("error", null, Mess.E00007, StringCS.CLOSE, null, null, false);
-      // }
+   document.getElementById("logoutOption").onclick = function () {
+      Common.movePage('login.html')
+   }
 
+   document.getElementById("zumenKensakuBtn").onclick = function () {
+      Common.movePage("/drawing_display.html")
    }
 
    document.getElementById("backBtn").onclick = function () {
@@ -90,14 +85,14 @@ function setupDatePicker() {
       });
 
       $("#kaishi").on("change", function () {
-            var _dateStart = $(this).val();
-            var _dateEnd = $("#shuryo").val();
-            if (_dateEnd != '') {
-               if (_dateStart > _dateEnd) {
-                  Common.setupModal("info", null, Mess.I00008, null, StringCS.OK, null, false);
-                  document.getElementById("kaishi").value = dateStart;      
-               }
+         var _dateStart = $(this).val();
+         var _dateEnd = $("#shuryo").val();
+         if (_dateEnd != '') {
+            if (_dateStart > _dateEnd) {
+               Common.setupModal("info", null, Mess.I00008, null, StringCS.OK, null, false);
+               document.getElementById("kaishi").value = dateStart;
             }
+         }
 
       });
 

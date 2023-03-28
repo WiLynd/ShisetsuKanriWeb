@@ -10,16 +10,20 @@ const areaList = [
 /*
    * ONCLICK ACTION
 */
-function onClickAction () {
+function onClickAction() {
+    document.getElementById("logoutOption").onclick = function () {
+        Common.movePage('login.html')
+    }
+
     document.getElementById("backBtn").onclick = function () {
         Common.movePage("/menu.html")
     }
 
-    $('#eriaIchiran').on('click', 'tbody tr', function() {
-        sessionStorage.setItem("area",areaList[this.id][2]);
+    $('#eriaIchiran').on('click', 'tbody tr', function () {
+        sessionStorage.setItem("area", areaList[this.id][2]);
         Common.movePage("/equipment_management_list.html")
     })
-      
+
 }
 
 
@@ -28,7 +32,7 @@ function onClickAction () {
 */
 function onLoadAction() {
     onClickAction();
-    Common.generateTable(areaList,"eriaIchiran")
+    Common.generateTable(areaList, "eriaIchiran")
 }
 
 window.onload = onLoadAction;
