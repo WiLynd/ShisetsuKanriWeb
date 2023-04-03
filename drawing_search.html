@@ -8,24 +8,24 @@
     <link rel="icon" type="image/png" href="./imgs/icons/ic-search.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/drawing_search.css">
-    <link rel="stylesheet" type="text/css" href="/css/modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/drawing_search.css">
+    <link rel="stylesheet" type="text/css" href="./css/modal.css">
+    <link rel="stylesheet" type="text/css" href="./css/util.css">
+    <link rel="stylesheet" href="./fonts/fontawesome-free-5.15.4-web/css/all.css">
 </head>
 
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
-			<div class="dropdown select-role">
-				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
-					data-bs-toggle="dropdown" aria-expanded="false">
-					<span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
-				</div>
+            <div class="dropdown select-role">
+                <div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
+                </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                 </ul>
-			</div>
+            </div>
 
             <div class="wrap-mainform p-t-30">
                 <span id="titleForm">
@@ -156,10 +156,233 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
         integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="vendor/jquery/jquery-ui-1.12.1.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./js/drawing_search.js"></script>
+    <script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="./vendor/jquery/jquery-ui-1.12.1.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script type="module" src="./js/drawing_search.js"></script> -->
+    <script>
+        /**
+           * VARIABLE
+         */
+        var dateStart = null;
+        var dateEnd = null;
+
+        /**
+        * MOVING TO ANOTHER PAGE
+        */
+        function movePage(page) {
+            window.location.href = page;
+        }
+
+        /**
+        * INITIALIZE MODAL
+        */
+
+        function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
+            // init view
+            var modal = document.getElementById("myModal");
+            var imageModal = document.getElementsByClassName("modal-image")[0];
+            var titleModal = document.getElementsByClassName("title-modal")[0];
+            var messageModal = document.getElementsByClassName("modal-message-detail")[0];
+            var button0 = document.getElementsByClassName("button-0")[0];
+            var button1 = document.getElementsByClassName("button-1")[0];
+            var button2 = document.getElementsByClassName("button-2")[0];
+            var closeButton = document.getElementsByClassName("modal-close-button")[0];
+
+            // title and message
+            if (title != null) {
+                titleModal.innerHTML = title;
+            }
+            if (message != null) {
+                messageModal.innerHTML = message;
+            }
+
+            // status
+            if (status == "load") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_loading_data.gif";
+            } else if (status == "success") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_success.gif";
+            } else if (status == "error") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_fail.gif";
+            } else if (status == "question") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_question.gif";
+            } else if (status == "info") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_info.gif";
+            }
+
+            // button
+            if (textButton0 != null) {
+                button0.style.display = "block";
+                button0.innerHTML = textButton0;
+                button0.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button0.style.display = "none";
+            }
+
+            if (textButton1 != null) {
+                button1.style.display = "block";
+                button1.innerHTML = textButton1;
+                button1.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button1.style.display = "none";
+            }
+
+            if (textButton2 != null) {
+                button2.style.display = "block";
+                button2.innerHTML = textButton2;
+                button2.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button2.style.display = "none";
+            }
+
+            if (isClose == true) {
+                closeButton.style.display = "block";
+                closeButton.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                closeButton.style.display = "none";
+            }
+
+            modal.style.display = "block";
+        }
+
+        /**
+           * ONCLICK ACTION
+        */
+        function onClickAction() {
+            document.getElementById("logoutOption").onclick = function () {
+                movePage('./login.html')
+            }
+
+            document.getElementById("zumenKensakuBtn").onclick = function () {
+                movePage("./drawing_display.html")
+            }
+
+            document.getElementById("backBtn").onclick = function () {
+                movePage("./menu.html")
+            }
+        }
+
+        /**
+           * ONCHANGE ACTION
+        */
+        function onChangeAction() {
+            document.getElementById("kaishi").onchange = function () {
+                if (document.getElementById("shuryo").value != "") {
+                    checkValidDay();
+                }
+            }
+
+            document.getElementById("shuryo").onchange = function () {
+                checkValidDay();
+            }
+        }
+
+        /**
+           * CHECK VALID DATE
+         */
+        function checkValidDay() {
+            var startDay = document.getElementById("kaishi").value;
+            var endDay = document.getElementById("shuryo").value;
+            if (endDay < startDay) {
+                setupModal("error", null, "開始日は終了日より大きいことができません。", "閉じる", null, null, false);
+            }
+        }
+
+        function setupDatePicker(nameDatePicker) {
+            var dpk = document.getElementById(nameDatePicker);
+            dpk.setAttribute("readOnly", "true");
+            dpk.style.backgroundColor = "White";
+        }
+
+        /** 
+            * SETUP DATEPICKER
+        */
+        function setupDatePicker() {
+            $(document).ready(function () {
+                $(function () {
+                    $.datepicker.regional['jp'] = {
+                        closeText: "閉じる",
+                        prevText: "前",
+                        nextText: "次",
+                        currentText: "現在",
+                        monthNames: ["- 1月", "- 2月", "- 3月", "- 4月", "- 5月", "- 6月",
+                            "- 7月", "- 8月", "- 9月", "- 10月", "- 11月", "- 12月"
+                        ],
+                        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月",
+                            "7月", "8月", "9月", "10月", "11月", "12月"
+                        ],
+                        dayNames: ["日", "月", "火", "水", "木", "金", "土"],
+                        dayNamesShort: ["日", "月", "火", "水", "木", "金", "土"],
+                        dayNamesMin: ["日", "月", "火", "水", "木", "金", "土"],
+                        dateFormat: "yy/mm/dd",
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: true,
+                    };
+                    $.datepicker.setDefaults($.datepicker.regional['jp']);
+
+                    $('#kaishi').datepicker();
+                    $('#shuryo').datepicker();
+                    setupDatePicker("kaishi");
+                    setupDatePicker("shuryo");
+                });
+
+                $("#kaishi").on("change", function () {
+                    var _dateStart = $(this).val();
+                    var _dateEnd = $("#shuryo").val();
+                    if (_dateEnd != '') {
+                        if (_dateStart > _dateEnd) {
+                            setupModal("info", null, "開始日は終了日より大きいことができません。", null, "OK", null, false);
+                            document.getElementById("kaishi").value = dateStart;
+                        }
+                    }
+
+                });
+
+                $("#kaishi").on("focus", function () {
+                    dateStart = $(this).val();
+                });
+
+
+                $("#shuryo").on("change", function () {
+                    var _dateEnd = $(this).val();
+                    var _dateStart = $("#kaishi").val();
+                    if (_dateStart > _dateEnd) {
+                        setupModal("info", null, "開始日は終了日より大きいことができません。", null, "OK", null, false);
+                        document.getElementById("shuryo").value = dateEnd;
+                    }
+                });
+
+                $("#shuryo").on("focus", function () {
+                    dateEnd = $(this).val();
+                });
+            });
+        }
+
+        /**
+           * ONLOAD ACTION
+        */
+        function onLoadAction() {
+            onClickAction();
+            onChangeAction();
+            setupDatePicker();
+        }
+
+        window.onload = onLoadAction;
+    </script>
 </body>
 
 </html>

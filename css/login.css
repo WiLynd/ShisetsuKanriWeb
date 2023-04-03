@@ -1,4 +1,9 @@
 /*---------------------------------------------*/
+img {
+  width: 40px;
+  
+}
+
 input {
 	outline: none;
 	border: none;

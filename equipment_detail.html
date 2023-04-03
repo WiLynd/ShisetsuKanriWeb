@@ -11,21 +11,21 @@
     <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/equipment_detail.css">
-    <link rel="stylesheet" type="text/css" href="/css/modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/equipment_detail.css">
+    <link rel="stylesheet" type="text/css" href="./css/modal.css">
+    <link rel="stylesheet" type="text/css" href="./css/util.css">
+    <link rel="stylesheet" href="./fonts/fontawesome-free-5.15.4-web/css/all.css">
 </head>
 
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
-			<div class="dropdown select-role">
-				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
-					data-bs-toggle="dropdown" aria-expanded="false">
-					<span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
-				</div>
+            <div class="dropdown select-role">
+                <div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
+                </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                 </ul>
-			</div>
+            </div>
 
             <div class="wrap-mainform">
                 <span id="titleForm">
@@ -154,7 +154,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text mw135 text jc-c">メモ</span>
                                     </div>
-                                    <input type="button" class="btn memo-btn text t-ip" value="メモ追加" / id="memoBtn">
+                                    <input type="button" class="btn memo-btn text t-ip" value="メモ追加" id="memoBtn">
                                 </div>
 
                             </div>
@@ -222,7 +222,199 @@
     <script src="fonts/fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./js/equipment_detail.js"></script>
+    <script>
+        /*****  VIEW VARIABLE  *****/
+        const memoList = [
+            ["2020年1月10日", "異音がしたため確認したが目立った…", ""],
+            ["2021年11月22日", "ベアリング交換", ""],
+        ];
+
+        /**
+   * MOVING TO ANOTHER PAGE
+*/
+        function movePage(page) {
+            window.location.href = page;
+        }
+
+        /**
+           * SET DATA ACTION
+        */
+        function setDataDetail() {
+            document.getElementById("lastCheck").value = "2022年8月1日";
+            document.getElementById("nextCheck").value = "2023年9月1日";
+            document.getElementById("controlNumber").value = sessionStorage.getItem("equipmentName");
+            document.getElementById("maker").value = "A社";
+            document.getElementById("purchaseDate").value = "2019年7月1日";
+            document.getElementById("administrator").value = "Nguyen Van Dung";
+        }
+
+        /**
+           * GENERATE TABLE
+        */
+        function generateTable(listItem, tableName) {
+            const table = document.getElementById(tableName);
+            const tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            for (let i = 0; i < listItem.length; i++) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < listItem[i].length; j++) {
+                    const cell = document.createElement("td");
+                    var button = document.createElement("button");
+                    if (j != listItem[i].length - 1) {
+                        var span = document.createElement("span");
+                        span.textContent = listItem[i][j];
+                        if (j == 0) {
+                            cell.classList.add("col-2");
+                        }
+                        cell.appendChild(span);
+                        cell.classList.add("text");
+                        row.appendChild(cell);
+                    }
+                    else {
+                        cell.classList.add("col-1");
+                        button.id = i;
+                        button.append("編集");
+                        button.classList.add("btn");
+                        button.classList.add("btn-default");
+                        button.classList.add("detail-btn");
+                        button.classList.add("text");
+                        cell.appendChild(button);
+                        row.appendChild(cell);
+                    }
+                }
+                row.id = i;
+                tbody.appendChild(row);
+            }
+        }
+
+        /**
+   * INITIALIZE MODAL
+   *
+   *
+*/
+
+        function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
+            // init view
+            var modal = document.getElementById("myModal");
+            var imageModal = document.getElementsByClassName("modal-image")[0];
+            var titleModal = document.getElementsByClassName("title-modal")[0];
+            var messageModal = document.getElementsByClassName("modal-message-detail")[0];
+            var button0 = document.getElementsByClassName("button-0")[0];
+            var button1 = document.getElementsByClassName("button-1")[0];
+            var button2 = document.getElementsByClassName("button-2")[0];
+            var closeButton = document.getElementsByClassName("modal-close-button")[0];
+
+            // title and message
+            if (title != null) {
+                titleModal.innerHTML = title;
+            }
+            if (message != null) {
+                messageModal.innerHTML = message;
+            }
+
+            // status
+            if (status == "load") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_loading_data.gif";
+            } else if (status == "success") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_success.gif";
+            } else if (status == "error") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_fail.gif";
+            } else if (status == "question") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_question.gif";
+            } else if (status == "info") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_info.gif";
+            }
+
+            // button
+            if (textButton0 != null) {
+                button0.style.display = "block";
+                button0.innerHTML = textButton0;
+                button0.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button0.style.display = "none";
+            }
+
+            if (textButton1 != null) {
+                button1.style.display = "block";
+                button1.innerHTML = textButton1;
+                button1.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button1.style.display = "none";
+            }
+
+            if (textButton2 != null) {
+                button2.style.display = "block";
+                button2.innerHTML = textButton2;
+                button2.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button2.style.display = "none";
+            }
+
+            if (isClose == true) {
+                closeButton.style.display = "block";
+                closeButton.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                closeButton.style.display = "none";
+            }
+
+            modal.style.display = "block";
+        }
+
+        /**
+           * ONCLICK ACTION
+        */
+        function onClickAction() {
+            document.getElementById("logoutOption").onclick = function () {
+                movePage('./login.html')
+            }
+
+            document.getElementById("backBtn").onclick = function () {
+                movePage("./equipment_management_list.html")
+            }
+
+            document.getElementById("memoBtn").onclick = function () {
+                sessionStorage.setItem("memoTitle", "");
+                movePage("./memo.html")
+            }
+
+            document.getElementById("setsubiShosaiBtn").onclick = async function () {
+                setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                document.getElementById("buttonAreaModal").onclick = function () {
+                    movePage("./equipment_management_list.html");
+                }
+            }
+
+            $('#memoTable').on('click', 'tbody tr td button', function () {
+                sessionStorage.setItem("memoTitle", memoList[this.id][1]);
+                movePage("./memo.html");
+            })
+        }
+
+        /**
+           * ONLOAD ACTION
+        */
+        function onLoadAction() {
+            onClickAction();
+            setDataDetail();
+            generateTable(memoList, "memoTable")
+            document.getElementById("title").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
+        }
+
+        window.onload = onLoadAction;
+    </script>
 </body>
 
 </html>

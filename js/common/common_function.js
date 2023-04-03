@@ -24,6 +24,13 @@ function generateTable(listItem, tableName) {
     }
 }
 
+/**
+   * CHANGE LANGUAGE
+*/
+function changeLanguage(lang) {
+    document.getElementById("title") = data.title;
+}
+
 
 /** 
    * BACK ACTION

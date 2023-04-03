@@ -11,21 +11,21 @@
     <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/daily_check_list.css">
-    <link rel="stylesheet" type="text/css" href="/css/modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/daily_check_list.css">
+    <link rel="stylesheet" type="text/css" href="./css/modal.css">
+    <link rel="stylesheet" type="text/css" href="./css/util.css">
+    <link rel="stylesheet" href="./fonts/fontawesome-free-5.15.4-web/css/all.css">
 </head>
 
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
-			<div class="dropdown select-role">
-				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
-					data-bs-toggle="dropdown" aria-expanded="false">
-					<span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
-				</div>
+            <div class="dropdown select-role">
+                <div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
+                </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                 </ul>
-			</div>
+            </div>
 
             <div class="wrap-mainform">
                 <span id="titleForm">
@@ -120,7 +120,220 @@
     <script src="fonts/fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./js/daily_check_list.js"></script>
+    <!-- <script type="module" src="./js/daily_check_list.js"></script> -->
+    <script>
+        /*****  VIEW VARIABLE  *****/
+        const dailyCheckList = [
+            [1, "WP1CK01", "外観検査", "ホース継手台およびパイプにひび割れや腐食はないか？", "はい", ""],
+            [2, "WP1CK02", "外観検査", "バルブなどに損傷はないか？", "はい", ""],
+            [3, "WP1CK03", "火炎の状態", "切断酸素気流は正常か？", "いいえ", ""],
+        ];
+
+        /**
+   * INITIALIZE MODAL
+*/
+
+        function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
+            // init view
+            var modal = document.getElementById("myModal");
+            var imageModal = document.getElementsByClassName("modal-image")[0];
+            var titleModal = document.getElementsByClassName("title-modal")[0];
+            var messageModal = document.getElementsByClassName("modal-message-detail")[0];
+            var button0 = document.getElementsByClassName("button-0")[0];
+            var button1 = document.getElementsByClassName("button-1")[0];
+            var button2 = document.getElementsByClassName("button-2")[0];
+            var closeButton = document.getElementsByClassName("modal-close-button")[0];
+
+            // title and message
+            if (title != null) {
+                titleModal.innerHTML = title;
+            }
+            if (message != null) {
+                messageModal.innerHTML = message;
+            }
+
+            // status
+            if (status == "load") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_loading_data.gif";
+            } else if (status == "success") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_success.gif";
+            } else if (status == "error") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_fail.gif";
+            } else if (status == "question") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_question.gif";
+            } else if (status == "info") {
+                titleModal.style.display = "none";
+                imageModal.src = "./imgs/gif/gif_info.gif";
+            }
+
+            // button
+            if (textButton0 != null) {
+                button0.style.display = "block";
+                button0.innerHTML = textButton0;
+                button0.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button0.style.display = "none";
+            }
+
+            if (textButton1 != null) {
+                button1.style.display = "block";
+                button1.innerHTML = textButton1;
+                button1.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button1.style.display = "none";
+            }
+
+            if (textButton2 != null) {
+                button2.style.display = "block";
+                button2.innerHTML = textButton2;
+                button2.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                button2.style.display = "none";
+            }
+
+            if (isClose == true) {
+                closeButton.style.display = "block";
+                closeButton.onclick = function () {
+                    modal.style.display = "none";
+                }
+            } else {
+                closeButton.style.display = "none";
+            }
+
+            modal.style.display = "block";
+        }
+
+        /**
+           * GENERATE TABLE
+        */
+        function generateTable(listItem) {
+            const table = document.getElementById("setsubiIchiran");
+            const tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            for (let i = 0; i < listItem.length; i++) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < listItem[i].length; j++) {
+                    const cell = document.createElement("td");
+                    var span = document.createElement("span");
+                    var div = document.createElement("div");
+                    var input = document.createElement("input");
+                    var label = document.createElement("label");
+                    var button = document.createElement("button");
+                    if (j < listItem[i].length - 2) {
+                        if (j != listItem[i].length - 3) {
+                            //     cell.onclick = function () {
+                            //         Common.setupModal("info", null,listItem[i][j], null, StringCS.OK, null, false);
+                            //     }
+                            span.textContent = listItem[i][j];
+                            cell.appendChild(span);
+                            cell.classList.add("text-center");
+                            cell.classList.add("text");
+                            row.appendChild(cell);
+                        }
+                        else {
+                            span.textContent = listItem[i][j];
+                            cell.appendChild(span);
+
+                            cell.classList.add("text");
+                            row.appendChild(cell);
+                        }
+
+                    }
+                    else {
+                        if (j == listItem[i].length - 2) {
+                            var divLabel = document.createElement("div");
+                            divLabel.classList.add("can-toggle__switch");
+                            divLabel.setAttribute("data-checked", "はい");
+                            divLabel.setAttribute("data-unchecked", "いいえ");
+                            if (listItem[i][j] == "はい") {
+                                label.appendChild(divLabel);
+                            }
+                            else {
+                                input.setAttribute("checked", "");
+                                label.appendChild(divLabel);
+                            }
+                            label.setAttribute("for", listItem[i][0])
+                            input.setAttribute("id", listItem[i][0]);
+                            input.setAttribute("type", "checkbox");
+                            div.classList.add("can-toggle");
+                            div.classList.add("can-toggle--size-large");
+                            cell.appendChild(div);
+                            div.appendChild(input);
+                            div.appendChild(label);
+                            row.appendChild(cell);
+                        }
+                        else {
+                            button.id = i;
+                            button.append("編集");
+                            button.classList.add("btn");
+                            button.classList.add("btn-default");
+                            button.classList.add("detail-btn");
+                            button.classList.add("text");
+                            cell.appendChild(button);
+                            row.appendChild(cell);
+                        }
+                    }
+                }
+                row.id = i;
+                tbody.appendChild(row);
+            }
+        }
+
+        /**
+* MOVING TO ANOTHER PAGE
+*/
+        function movePage(page) {
+            window.location.href = page;
+        }
+
+        /*
+           * ONCLICK ACTION
+        */
+        function onClickAction() {
+            document.getElementById("logoutOption").onclick = function () {
+                movePage('./login.html');
+            }
+
+            document.getElementById("backBtn").onclick = function () {
+                movePage("./equipment_daily_check_list.html");
+            }
+
+            document.getElementById("torokuBtn").onclick = function () {
+                setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                document.getElementById("buttonAreaModal").onclick = function () {
+                    movePage("./equipment_daily_check_list.html");
+                }
+            }
+
+            $('#setsubiIchiran').on('click', 'tbody tr td button', function () {
+                sessionStorage.setItem("status", dailyCheckList[this.id][4]);
+                sessionStorage.setItem("inspectionDetail", dailyCheckList[this.id][3]);
+                sessionStorage.setItem("controlNumber", dailyCheckList[this.id][1]);
+                movePage("./equipment_daily_check_detail.html");
+            })
+        }
+
+        /*
+           * ONLOAD ACTION
+        */
+        function onLoadAction() {
+            onClickAction();
+            generateTable(dailyCheckList);
+            document.getElementById("title").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
+        }
+
+        window.onload = onLoadAction;
+    </script>
 </body>
 
 </html>

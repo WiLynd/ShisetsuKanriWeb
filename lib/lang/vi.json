@@ -1,0 +1,11 @@
+{
+    "login" : {
+        "title" : "Hệ thống quản lý thông tin nhà máy",
+        "department" : "Bộ phận",
+        "user" : "Người dùng",
+        "password" : "Mật khẩu",
+        "rememberPw" : "Nhớ mật khẩu",
+        "login" : "Đăng nhập"
+    }
+    
+}

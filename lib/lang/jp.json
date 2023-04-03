@@ -1,0 +1,11 @@
+{
+    "login" : {
+        "title" : "（工場情報集約システム）",
+        "department" : "部門",
+        "user" : "ユーザー",
+        "password" : "パスワード",
+        "rememberPw" : "パスワードを保存",
+        "login" : "ログイン"
+    }
+    
+}

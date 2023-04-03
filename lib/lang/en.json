@@ -1,0 +1,11 @@
+{
+    "login" : {
+        "title" : "Factory information aggregation system",
+        "department" : "Department",
+        "user": "User",
+        "password" : "Password",
+        "rememberPw" : "Remember password",
+        "login" : "Login"
+    }
+    
+}

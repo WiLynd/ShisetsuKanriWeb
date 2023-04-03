@@ -8,24 +8,24 @@
     <link rel="icon" type="image/png" href="./imgs/icons/ic-list.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/equipment_daily_check_list.css">
-    <link rel="stylesheet" type="text/css" href="/css/modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/equipment_daily_check_list.css">
+    <link rel="stylesheet" type="text/css" href="./css/modal.css">
+    <link rel="stylesheet" type="text/css" href="./css/util.css">
+    <link rel="stylesheet" href="./fonts/fontawesome-free-5.15.4-web/css/all.css">
 </head>
 
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
-			<div class="dropdown select-role">
-				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
-					data-bs-toggle="dropdown" aria-expanded="false">
-					<span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
-				</div>
+            <div class="dropdown select-role">
+                <div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text" id="userName"><i class="ic-dropdown far fa-user"></i><a id="name"></a></span>
+                </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                 </ul>
-			</div>
+            </div>
 
             <div class="wrap-mainform">
                 <span id="titleForm">
@@ -87,7 +87,81 @@
     <script src="fonts/fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./js/equipment_daily_check_list.js"></script>
+    <!-- <script type="module" src="./js/equipment_daily_check_list.js"></script> -->
+    <script>
+        /**
+* MOVING TO ANOTHER PAGE
+*/
+        function movePage(page) {
+            window.location.href = page;
+        }
+
+        /**
+* GENERATE TABLE
+*/
+        function generateTable(listItem, tableName) {
+            const table = document.getElementById(tableName);
+            const tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            for (let i = 0; i < listItem.length; i++) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < listItem[i].length; j++) {
+                    const cell = document.createElement("td");
+                    var span = document.createElement("span");
+                    span.textContent = listItem[i][j];
+                    cell.appendChild(span);
+                    cell.classList.add("text");
+                    cell.classList.add("text-center");
+                    row.appendChild(cell);
+                }
+                row.id = i;
+                tbody.appendChild(row);
+            }
+        }
+
+        /*****  VIEW VARIABLE  *****/
+        const equipmentDailyCheckList = [
+            [1, "WP1-01", "ガス溶接機", ""],
+            [2, "WP1-02", "アーク溶接機", ""],
+            [3, "WP1-03", "ティグ溶接機", ""],
+            [4, "WP1-04", "ガス溶接機", ""],
+            [5, "WP1-05", "アーク溶接機", ""],
+            [6, "WP1-06", "ティグ溶接機", ""],
+            [7, "WP1-07", "ガス溶接機", ""],
+            [8, "WP1-08", "アーク溶接機", ""],
+            [9, "WP1-09", "ティグ溶接機", ""],
+            [10, "WP1-10", "ガス溶接機", ""],
+        ]
+
+        /*
+           * ONCLICK ACTION
+        */
+        function onClickAction() {
+            document.getElementById("logoutOption").onclick = function () {
+                movePage('./login.html');
+            }
+
+            document.getElementById("backBtn").onclick = function () {
+                movePage("./area_list_check.html");
+            }
+
+            $('#setsubiIchiran').on('click', 'tbody tr', function () {
+                sessionStorage.setItem("item", equipmentDailyCheckList[this.id][2]);
+                movePage("./daily_check_list.html");
+            })
+        }
+
+        /*
+           * ONLOAD ACTION
+        */
+        function onLoadAction() {
+            onClickAction();
+            generateTable(equipmentDailyCheckList, "setsubiIchiran");
+            document.getElementById("title").innerHTML = sessionStorage.getItem("area");
+        }
+
+        window.onload = onLoadAction;
+    </script>
 </body>
 
 </html>
