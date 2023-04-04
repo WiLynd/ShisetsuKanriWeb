@@ -49,7 +49,7 @@
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mw135 text jc-e" id="idNumber">管理番号</span>
+                                    <span class="input-group-text mw175 text jc-e" id="idNumber">管理番号</span>
                                 </div>
 
                                 <input type="number" class="form-control ta-l text text-right t-ip"
@@ -62,7 +62,7 @@
                         <div class="col-6 p-r-0 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="date-start-area">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mw135 text jc-sb">
+                                    <span class="input-group-text mw175 text jc-sb">
                                         <span id="day">作業日</span>
                                         <span id="dayStart">開始</span>
                                     </span>
@@ -100,7 +100,7 @@
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mw135 text jc-e" id="productType">製品種別</span>
+                                    <span class="input-group-text mw175 text jc-e" id="productType">製品種別</span>
                                 </div>
 
                                 <select class="custom-select combobox text t-ip" id="cbb_productType">
@@ -498,15 +498,15 @@
             setLanguage(parseInt(sessionStorage.getItem("language")));
             switch (parseInt(sessionStorage.getItem("language"))) {
                 case 0:
-                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-bars"></i>Menu';
                     document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
                     break;
                 case 1:
-                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-bars"></i>Menu';
                     document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
                     break;
                 case 2:
-                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-bars"></i>メニュー';
                     document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
                     break;
             }
