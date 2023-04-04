@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>メニュー</title>
+    <title id="title">メニュー</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-menu.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -23,6 +23,30 @@
 <body>
     <div id="backgroundPage">
         <div class="container-mainform">
+            <div class="dropleft select-language">
+                <div class="btn-menu btn-secondary" type="button" id="dropdownSelectLanguage" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img src="imgs/icons/ic-jp.png" alt="" id="language" value="jp">
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownSelectLanguage">
+                    <li id="lgEn">
+                        <a class="dropdown-item">
+                            <img src="imgs/icons/ic-en.png" alt=""><span class="text m-l-10">English</span>
+                        </a>
+                    </li>
+                    <li id="lgVi">
+                        <a class="dropdown-item">
+                            <img src="imgs/icons/ic-vi.png" alt=""><span class="text m-l-10">Tiếng Việt</span>
+                        </a>
+                    </li>
+                    <li id="lgJp" hidden>
+                        <a class="dropdown-item">
+                            <img src="imgs/icons/ic-jp.png" alt=""><span class="text m-l-10">日本語</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="dropdown select-role">
                 <div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,11 +55,13 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="logout fas fa-sign-out-alt m-r-10"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
             </div>
+
 
             <div class="wrap-mainform">
                 <span id="titleForm">
@@ -94,12 +120,34 @@
     <script src="./fonts/fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
     <!-- <script type="module" src="./js/menu.js"></script> -->
     <script>
+        var language = [
+            [
+                "MENU",
+                "Show Drawing",
+                "Manage Facility",
+                "Daily Check"
+            ],
+            [
+                "MENU",
+                "Hiển thị<br>bản vẽ",
+                "Quản lý<br>thiết bị",
+                "Kiểm tra<br>hằng ngày"
+            ],
+            [
+                "メニュー",
+                "図面確認",
+                "設備管理",
+                "日常点検"
+            ]
+        ];
+
+
         /**
-		* MOVING TO ANOTHER PAGE
-		*/
-		function movePage(page) {
-			window.location.href = page;
-		}
+        * MOVING TO ANOTHER PAGE
+        */
+        function movePage(page) {
+            window.location.href = page;
+        }
 
         /**
            * ONCLICK ACTION
@@ -120,13 +168,96 @@
             document.getElementById("nichijoTenkenBtn").onclick = function () {
                 movePage('./area_list_check.html')
             };
+
+            document.getElementById("lgEn").onclick = function () {
+                setIconEnglish();
+                setLanguage(0);
+                sessionStorage.setItem("language", 0);
+            }
+
+            document.getElementById("lgVi").onclick = function () {
+                setIconVietnamese();
+                setLanguage(1);
+                sessionStorage.setItem("language", 1);
+            }
+
+            document.getElementById("lgJp").onclick = function () {
+                setIconJapanese();
+                setLanguage(2);
+                sessionStorage.setItem("language", 2);
+            }
         }
 
         /*
-           * ONLOAD ACTION
+            * SET ICON ENGLISH
+        */
+        function setIconEnglish() {
+            document.getElementById("language").setAttribute("src", "imgs/icons/ic-en.png");
+            document.getElementById("language").setAttribute("value", "en");
+            document.getElementById("lgEn").setAttribute("hidden", "");
+            document.getElementById("lgVi").removeAttribute("hidden");
+            document.getElementById("lgJp").removeAttribute("hidden");
+            document.getElementById("logoutBtn").innerHTML = '<i class="logout fas fa-sign-out-alt m-r-10"></i>Logout';
+        }
+
+        /*
+            * SET ICON VIETNAMESE
+        */
+        function setIconVietnamese() {
+            document.getElementById("language").setAttribute("src", "imgs/icons/ic-vi.png");
+            document.getElementById("language").setAttribute("value", "vi");
+            document.getElementById("lgVi").setAttribute("hidden", "");
+            document.getElementById("lgEn").removeAttribute("hidden");
+            document.getElementById("lgJp").removeAttribute("hidden");
+            document.getElementById("logoutBtn").innerHTML = '<i class="logout fas fa-sign-out-alt m-r-10"></i>Đăng xuất';
+        }
+
+        /*
+            * SET ICON JAPANESE
+        */
+        function setIconJapanese() {
+            document.getElementById("language").setAttribute("src", "imgs/icons/ic-jp.png");
+            document.getElementById("language").setAttribute("value", "jp");
+            document.getElementById("lgJp").setAttribute("hidden", "");
+            document.getElementById("lgEn").removeAttribute("hidden");
+            document.getElementById("lgVi").removeAttribute("hidden");
+            document.getElementById("logoutBtn").innerHTML = '<i class="logout fas fa-sign-out-alt m-r-10"></i>ログアウト';
+        }
+
+        /*
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("zumenKakuninBtn").innerHTML = language[lang][1];
+            document.getElementById("setsubiKanriBtn").innerHTML = language[lang][2];
+            document.getElementById("nichijoTenkenBtn").innerHTML = language[lang][3];
+        }
+
+        /*
+            * ONLOAD ACTION
         */
         function onLoadAction() {
             onclickAction();
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    setIconEnglish();
+                    break;
+                case 1:
+                    setIconVietnamese();
+                    break;
+                case 2:
+                    setIconJapanese();
+                    break;
+            }
+            if (sessionStorage.getItem("language") == null) {
+                setLanguage(2);
+                sessionStorage.setItem("language", 2)
+            }
+            else {
+                setLanguage(parseInt(sessionStorage.getItem("language")));
+            }
         }
 
         window.onload = onLoadAction;

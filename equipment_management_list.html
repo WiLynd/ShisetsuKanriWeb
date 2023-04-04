@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>設備一覧</title>
+    <title id="title">設備一覧</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-list.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -28,8 +28,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -40,7 +46,7 @@
                     設備一覧
                 </span>
                 <p class="divider-text">
-                    <span class="title-group" id="title"></span>
+                    <span class="title-group" id="titleGroup"></span>
                 </p>
 
                 <div class="row content">
@@ -51,13 +57,13 @@
                                     <th class="col-1">
                                         No.
                                     </th>
-                                    <th class="col-3">
+                                    <th class="col-3" id="idNumber">
                                         管理番号
                                     </th>
-                                    <th class="col-6">
+                                    <th class="col-6" id="controlItems">
                                         管理項目
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-2" id="remark">
                                         備考
                                     </th>
                                 </tr>
@@ -68,14 +74,12 @@
 
                 <div class="button-area p-b-10">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
                     </div>
                 </div>
@@ -98,8 +102,8 @@
         /**
 * GENERATE TABLE
 */
-        function generateTable(listItem, tableName) {
-            const table = document.getElementById(tableName);
+        function generateTable(listItem) {
+            const table = document.getElementById("bankinKakoEria");
             const tbody = document.createElement("tbody");
             table.appendChild(tbody);
             for (let i = 0; i < listItem.length; i++) {
@@ -121,17 +125,78 @@
 
         /*****  VIEW VARIABLE  *****/
         const equipmentList = [
-            [1, "SP1-01", "折り曲げ機", ""],
-            [2, "SP1-02", "レーザー加工機", ""],
-            [3, "SP1-03", "卓上ボール盤", ""],
-            [4, "SP1-04", "折り曲げ機", ""],
-            [5, "SP1-05", "レーザー加工機", ""],
-            [6, "SP1-06", "卓上ボール盤", ""],
-            [7, "SP1-07", "折り曲げ機", ""],
-            [8, "SP1-08", "レーザー加工機", ""],
-            [9, "SP1-09", "卓上ボール盤", ""],
-            [10, "SP1-10", "折り曲げ機", ""],
+            [
+                [1, "SP1-01", "Folding machine", ""],
+                [2, "SP1-02", "Laser processing machine", ""],
+                [3, "SP1-03", "Desktop drilling machine", ""],
+                [4, "SP1-04", "Folding machine", ""],
+                [5, "SP1-05", "Laser processing machine", ""],
+                [6, "SP1-06", "Desktop drilling machine", ""],
+                [7, "SP1-07", "Folding machine", ""],
+                [8, "SP1-08", "Laser processing machine", ""],
+                [9, "SP1-09", "Desktop drilling machine", ""],
+                [10, "SP1-10", "Folding machine", ""],
+            ],
+            [
+                [1, "SP1-01", "Máy gấp", ""],
+                [2, "SP1-02", "Máy gia công laser", ""],
+                [3, "SP1-03", "Máy khoan để bàn", ""],
+                [4, "SP1-04", "Máy gấp", ""],
+                [5, "SP1-05", "Máy gia công laser", ""],
+                [6, "SP1-06", "Máy khoan để bàn", ""],
+                [7, "SP1-07", "Máy gấp", ""],
+                [8, "SP1-08", "Máy gia công laser", ""],
+                [9, "SP1-09", "Máy khoan để bàn", ""],
+                [10, "SP1-10", "Máy gấp", ""],
+            ],
+            [
+                [1, "SP1-01", "折り曲げ機", ""],
+                [2, "SP1-02", "レーザー加工機", ""],
+                [3, "SP1-03", "卓上ボール盤", ""],
+                [4, "SP1-04", "折り曲げ機", ""],
+                [5, "SP1-05", "レーザー加工機", ""],
+                [6, "SP1-06", "卓上ボール盤", ""],
+                [7, "SP1-07", "折り曲げ機", ""],
+                [8, "SP1-08", "レーザー加工機", ""],
+                [9, "SP1-09", "卓上ボール盤", ""],
+                [10, "SP1-10", "折り曲げ機", ""],
+            ]
+        ];
+        var language = [
+            [
+                "FACILITY LIST",
+                "ID",
+                "Control items",
+                "Remark",
+                "Back"
+            ],
+            [
+                "DANH SÁCH THIẾT BỊ",
+                "ID",
+                "Danh mục quản lý",
+                "Ghi chú",
+                "Trở về"
+            ],
+            [
+                "設備一覧",
+                "管理番号",
+                "管理項目",
+                "備考",
+                "戻る"
+            ]
         ]
+
+        /*
+           * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("controlItems").innerHTML = language[lang][2];
+            document.getElementById("remark").innerHTML = language[lang][3];
+            document.getElementById("backBtn").innerHTML = language[lang][4];
+        }
 
         /*
            * ONCLICK ACTION
@@ -141,13 +206,17 @@
                 movePage('./login.html')
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./area_list_equipment.html")
             }
 
             $('#bankinKakoEria').on('click', 'tbody tr', function () {
-                sessionStorage.setItem("equipmentName", equipmentList[this.id][1]);
-                sessionStorage.setItem("item", equipmentList[this.id][2]);
+                sessionStorage.setItem("equipmentName", equipmentList[parseInt(sessionStorage.getItem("language"))][this.id][1]);
+                sessionStorage.setItem("item", equipmentList[parseInt(sessionStorage.getItem("language"))][this.id][2]);
                 movePage("./equipment_detail.html")
             })
         }
@@ -157,8 +226,23 @@
         */
         function onLoadAction() {
             onClickAction();
-            generateTable(equipmentList, "bankinKakoEria");
-            document.getElementById("title").innerHTML = sessionStorage.getItem("area");
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            generateTable(equipmentList[parseInt(sessionStorage.getItem("language"))]);
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
+            document.getElementById("titleGroup").innerHTML = sessionStorage.getItem("area");
         }
 
         window.onload = onLoadAction;

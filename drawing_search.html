@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>図面検索</title>
+    <title id="title">図面検索</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-search.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -43,7 +49,7 @@
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mw135 text jc-e">管理番号</span>
+                                    <span class="input-group-text mw135 text jc-e" id="idNumber">管理番号</span>
                                 </div>
 
                                 <input type="number" class="form-control ta-l text text-right t-ip"
@@ -57,8 +63,8 @@
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text mw135 text jc-sb">
-                                        <span>作業日</span>
-                                        <span>開始</span>
+                                        <span id="day">作業日</span>
+                                        <span id="dayStart">開始</span>
                                     </span>
                                 </div>
 
@@ -76,7 +82,7 @@
                                 <div class="col-10 p-l-0" id="date-end-area">
                                     <div class="form-group input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text mw70 text jc-e">
+                                            <span class="input-group-text mw70 text jc-e" id="dayEnd">
                                                 終了
                                             </span>
                                         </div>
@@ -94,13 +100,13 @@
                         <div class="col-12">
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mw135 text jc-e">製品種別</span>
+                                    <span class="input-group-text mw135 text jc-e" id="productType">製品種別</span>
                                 </div>
 
                                 <select class="custom-select combobox text t-ip" id="cbb_productType">
-                                    <option value="0">送風機</option>
-                                    <option value="1">フィルター</option>
-                                    <option value="2">原動機</option>
+                                    <option value="0" id="op1">送風機</option>
+                                    <option value="1" id="op2">フィルター</option>
+                                    <option value="2" id="op3">原動機</option>
                                     <option value="-" selected hidden></option>
                                 </select>
                             </div>
@@ -109,14 +115,12 @@
 
                     <div class="button-area p-b-10">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                             </div>
-                            <div class="col-3">
-                            </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <button type="button" class="btn btn-default text-center"
                                     id="zumenKensakuBtn">一覧表示</button>
                             </div>
@@ -160,6 +164,47 @@
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- <script type="module" src="./js/drawing_search.js"></script> -->
     <script>
+        var language = [
+            [
+                "DRAWING SEARCH",
+                "ID",
+                "Date",
+                "From",
+                "To",
+                "Product type",
+                "Back",
+                "Show list",
+                "Blower",
+                "Filter",
+                "Motor"
+            ],
+            [
+                "TÌM KIẾM BẢN VẼ",
+                "ID",
+                "Ngày",
+                "Bắt đầu",
+                "Kết thúc",
+                "Loại sản phẩm",
+                "Trở về",
+                "Hiển thị danh sách",
+                "Quạt gió",
+                "Lọc",
+                "Động cơ"
+            ],
+            [
+                "図面検索",
+                "管理番号",
+                "作業日",
+                "開始",
+                "終了",
+                "製品種別",
+                "戻る",
+                "一覧表示",
+                "送風機",
+                "フィルター",
+                "原動機"
+            ]
+        ]
         /**
            * VARIABLE
          */
@@ -171,6 +216,24 @@
         */
         function movePage(page) {
             window.location.href = page;
+        }
+
+        /*
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("day").innerHTML = language[lang][2];
+            document.getElementById("dayStart").innerHTML = language[lang][3];
+            document.getElementById("dayEnd").innerHTML = language[lang][4];
+            document.getElementById("productType").innerHTML = language[lang][5];
+            document.getElementById("backBtn").innerHTML = language[lang][6];
+            document.getElementById("zumenKensakuBtn").innerHTML = language[lang][7];
+            document.getElementById("op1").innerHTML = language[lang][8];
+            document.getElementById("op2").innerHTML = language[lang][9];
+            document.getElementById("op3").innerHTML = language[lang][10];
         }
 
         /**
@@ -265,6 +328,10 @@
                 movePage('./login.html')
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("zumenKensakuBtn").onclick = function () {
                 movePage("./drawing_display.html")
             }
@@ -296,7 +363,17 @@
             var startDay = document.getElementById("kaishi").value;
             var endDay = document.getElementById("shuryo").value;
             if (endDay < startDay) {
-                setupModal("error", null, "開始日は終了日より大きいことができません。", "閉じる", null, null, false);
+                switch (parseInt(sessionStorage.getItem("language"))) {
+                    case 0:
+                        setupModal("info", null, "Start date cannot be greater than end date.", null, "OK", null, false);
+                        break;
+                    case 1:
+                        setupModal("info", null, "Ngày bắt đầu không thể lớn hơn ngày kết thúc.", null, "OK", null, false);
+                        break;
+                    case 2:
+                        setupModal("info", null, "開始日は終了日より大きいことができません。", null, "OK", null, false);
+                        break;
+                }
             }
         }
 
@@ -312,31 +389,61 @@
         function setupDatePicker() {
             $(document).ready(function () {
                 $(function () {
-                    $.datepicker.regional['jp'] = {
-                        closeText: "閉じる",
-                        prevText: "前",
-                        nextText: "次",
-                        currentText: "現在",
-                        monthNames: ["- 1月", "- 2月", "- 3月", "- 4月", "- 5月", "- 6月",
-                            "- 7月", "- 8月", "- 9月", "- 10月", "- 11月", "- 12月"
-                        ],
-                        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月",
-                            "7月", "8月", "9月", "10月", "11月", "12月"
-                        ],
-                        dayNames: ["日", "月", "火", "水", "木", "金", "土"],
-                        dayNamesShort: ["日", "月", "火", "水", "木", "金", "土"],
-                        dayNamesMin: ["日", "月", "火", "水", "木", "金", "土"],
-                        dateFormat: "yy/mm/dd",
-                        firstDay: 1,
-                        isRTL: false,
-                        showMonthAfterYear: true,
-                    };
-                    $.datepicker.setDefaults($.datepicker.regional['jp']);
+                    if (parseInt(sessionStorage.getItem("language")) == 2) {
+                        $.datepicker.regional['jp'] = {
+                            closeText: "閉じる",
+                            prevText: "前",
+                            nextText: "次",
+                            currentText: "現在",
+                            monthNames: ["- 1月", "- 2月", "- 3月", "- 4月", "- 5月", "- 6月",
+                                "- 7月", "- 8月", "- 9月", "- 10月", "- 11月", "- 12月"
+                            ],
+                            monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月",
+                                "7月", "8月", "9月", "10月", "11月", "12月"
+                            ],
+                            dayNames: ["日", "月", "火", "水", "木", "金", "土"],
+                            dayNamesShort: ["日", "月", "火", "水", "木", "金", "土"],
+                            dayNamesMin: ["日", "月", "火", "水", "木", "金", "土"],
+                            dateFormat: "yy/mm/dd",
+                            firstDay: 1,
+                            isRTL: false,
+                            showMonthAfterYear: true,
+                        };
+                        $.datepicker.setDefaults($.datepicker.regional['jp']);
 
-                    $('#kaishi').datepicker();
-                    $('#shuryo').datepicker();
-                    setupDatePicker("kaishi");
-                    setupDatePicker("shuryo");
+                        $('#kaishi').datepicker();
+                        $('#shuryo').datepicker();
+                        setupDatePicker("kaishi");
+                        setupDatePicker("shuryo");
+                    }
+                    else {
+                        $.datepicker.regional['en'] = {
+                            closeText: "Close",
+                            prevText: "Previous",
+                            nextText: "Next",
+                            currentText: "Current",
+                            monthNames: ["- January", "- February", "- March", "- April", "- May", "- June",
+                                "- July", "- August", "- September", "- October", "- November", "- December"
+                            ],
+                            monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                            ],
+                            dayNames: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                            dayNamesShort: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                            dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                            dateFormat: "dd/mm/yy",
+                            firstDay: 1,
+                            isRTL: false,
+                            showMonthAfterYear: true,
+                        };
+                        $.datepicker.setDefaults($.datepicker.regional['en']);
+
+                        $('#kaishi').datepicker();
+                        $('#shuryo').datepicker();
+                        setupDatePicker("kaishi");
+                        setupDatePicker("shuryo");
+                    }
+
                 });
 
                 $("#kaishi").on("change", function () {
@@ -344,11 +451,21 @@
                     var _dateEnd = $("#shuryo").val();
                     if (_dateEnd != '') {
                         if (_dateStart > _dateEnd) {
-                            setupModal("info", null, "開始日は終了日より大きいことができません。", null, "OK", null, false);
-                            document.getElementById("kaishi").value = dateStart;
+                            switch (parseInt(sessionStorage.getItem("language"))) {
+                                case 0:
+                                    setupModal("info", null, "Start date cannot be greater than end date.", null, "OK", null, false);
+                                    break;
+                                case 1:
+                                    setupModal("info", null, "Ngày bắt đầu không thể lớn hơn ngày kết thúc.", null, "OK", null, false);
+                                    break;
+                                case 2:
+                                    setupModal("info", null, "開始日は終了日より大きいことができません。", null, "OK", null, false);
+                                    break;
+
+                                    document.getElementById("kaishi").value = dateStart;
+                            }
                         }
                     }
-
                 });
 
                 $("#kaishi").on("focus", function () {
@@ -378,6 +495,21 @@
             onClickAction();
             onChangeAction();
             setupDatePicker();
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
         }
 
         window.onload = onLoadAction;

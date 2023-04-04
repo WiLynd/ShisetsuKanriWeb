@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>図面表示</title>
+    <title id="title">図面表示</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-list.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -47,13 +53,13 @@
                                     <th class="col-1">
                                         No.
                                     </th>
-                                    <th class="col-3">
+                                    <th class="col-3" id="idNumber">
                                         管理番号
                                     </th>
-                                    <th class="col-6">
+                                    <th class="col-6" id="productName">
                                         製品名
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-2" id="remark">
                                         備考
                                     </th>
                                 </tr>
@@ -64,14 +70,12 @@
 
                 <div class="button-area">
                     <div class="row ed-v">
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
                     </div>
                 </div>
@@ -97,23 +101,84 @@
 
         /*****  VIEW VARIABLE  *****/
         const drawingList = [
-            [1, "23-01110001", "送風機ファン01 (〇〇株式会社)", ""],
-            [2, "23-01110002", "送風機ファン02 (〇〇株式会社)", ""],
-            [3, "23-01110003", "送風機ファン03 (〇〇株式会社)", ""],
-            [4, "23-01110004", "送風機ファン04 (〇〇株式会社)", ""],
-            [5, "23-01110005", "送風機ファン05 (〇〇株式会社)", ""],
-            [6, "23-01110006", "送風機ファン06 (〇〇株式会社)", ""],
-            [7, "23-01110007", "送風機ファン07 (〇〇株式会社)", ""],
-            [8, "23-01110008", "送風機ファン08 (〇〇株式会社)", ""],
-            [9, "23-01110009", "送風機ファン09 (〇〇株式会社)", ""],
-            [10, "23-01110010", "送風機ファン10 (〇〇株式会社)", ""],
+            [
+                [1, "23-01110001", "Blower Fan 01 (〇〇 Corporation)", ""],
+                [2, "23-01110002", "Blower Fan 02 (〇〇 Corporation)", ""],
+                [3, "23-01110003", "Blower Fan 03 (〇〇 Corporation)", ""],
+                [4, "23-01110004", "Blower Fan 04 (〇〇 Corporation)", ""],
+                [5, "23-01110005", "Blower Fan 05 (〇〇 Corporation)", ""],
+                [6, "23-01110006", "Blower Fan 06 (〇〇 Corporation)", ""],
+                [7, "23-01110007", "Blower Fan 07 (〇〇 Corporation)", ""],
+                [8, "23-01110008", "Blower Fan 08 (〇〇 Corporation)", ""],
+                [9, "23-01110009", "Blower Fan 09 (〇〇 Corporation)", ""],
+                [10, "23-01110010", "Blower Fan 10 (〇〇 Corporation)", ""],
+            ],
+            [
+                [1, "23-01110001", "Quạt Thổi 01 (〇〇 Corporation)", ""],
+                [2, "23-01110002", "Quạt Thổi 02 (〇〇 Corporation)", ""],
+                [3, "23-01110003", "Quạt Thổi 03 (〇〇 Corporation)", ""],
+                [4, "23-01110004", "Quạt Thổi 04 (〇〇 Corporation)", ""],
+                [5, "23-01110005", "Quạt Thổi 05 (〇〇 Corporation)", ""],
+                [6, "23-01110006", "Quạt Thổi 06 (〇〇 Corporation)", ""],
+                [7, "23-01110007", "Quạt Thổi 07 (〇〇 Corporation)", ""],
+                [8, "23-01110008", "Quạt Thổi 08 (〇〇 Corporation)", ""],
+                [9, "23-01110009", "Quạt Thổi 09 (〇〇 Corporation)", ""],
+                [10, "23-01110010", "Quạt Thổi 10 (〇〇 Corporation)", ""],
+            ],
+            [
+                [1, "23-01110001", "送風機ファン01 (〇〇株式会社)", ""],
+                [2, "23-01110002", "送風機ファン02 (〇〇株式会社)", ""],
+                [3, "23-01110003", "送風機ファン03 (〇〇株式会社)", ""],
+                [4, "23-01110004", "送風機ファン04 (〇〇株式会社)", ""],
+                [5, "23-01110005", "送風機ファン05 (〇〇株式会社)", ""],
+                [6, "23-01110006", "送風機ファン06 (〇〇株式会社)", ""],
+                [7, "23-01110007", "送風機ファン07 (〇〇株式会社)", ""],
+                [8, "23-01110008", "送風機ファン08 (〇〇株式会社)", ""],
+                [9, "23-01110009", "送風機ファン09 (〇〇株式会社)", ""],
+                [10, "23-01110010", "送風機ファン10 (〇〇株式会社)", ""],
+            ]
+        ];
+        var language = [
+            [
+                "DRAWING DISPLAY",
+                "ID",
+                "Product Name",
+                "Remark",
+                "Back"
+            ],
+            [
+                "HIỂN THỊ BẢN VẼ",
+                "ID",
+                "Tên sản phẩm",
+                "Ghi chú",
+                "Trở về"
+            ],
+            [
+                "図面表示",
+                "管理番号",
+                "製品名",
+                "備考",
+                "戻る"
+            ]
         ];
 
+        /*
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("productName").innerHTML = language[lang][2];
+            document.getElementById("remark").innerHTML = language[lang][3];
+            document.getElementById("backBtn").innerHTML = language[lang][4];
+        }
+
         /**
-   * GENERATE TABLE
-*/
-        function generateTable(listItem, tableName) {
-            const table = document.getElementById(tableName);
+            * GENERATE TABLE
+        */
+        function generateTable(listItem) {
+            const table = document.getElementById("zumenHyoji");
             const tbody = document.createElement("tbody");
             table.appendChild(tbody);
             for (let i = 0; i < listItem.length; i++) {
@@ -141,6 +206,10 @@
                 movePage('./login.html')
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./drawing_search.html")
             }
@@ -152,7 +221,24 @@
         */
         function onLoadAction() {
             onClickAction();
-            generateTable(drawingList, "zumenHyoji")
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            generateTable(drawingList[parseInt(sessionStorage.getItem("language"))]);
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
+
         }
 
         window.onload = onLoadAction;

@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>エリア一覧</title>
+    <title id="title">エリア一覧</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-list.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -46,13 +52,13 @@
                                     <th class="col-1">
                                         No.
                                     </th>
-                                    <th class="col-3">
+                                    <th class="col-3" id="idNumber">
                                         管理番号
                                     </th>
-                                    <th class="col-6">
+                                    <th class="col-6" id=areaName>
                                         エリア名
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-2" id="remark">
                                         備考
                                     </th>
                                 </tr>
@@ -63,14 +69,12 @@
 
                 <div class="button-area p-b-10">
                     <div class="row content ed-v">
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text text-center" id="backBtn">戻る</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
                     </div>
                 </div>
@@ -84,18 +88,72 @@
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- <script type="module" src="./js/area_list_check.js"></script> -->
     <script>
+        /*****  VIEW VARIABLE  *****/
+        const areaList = [
+            [
+                [1, "R01-001", "Sheet metal processing area", ""],
+                [2, "R01-002", "Welding area", ""],
+                [3, "R01-003", "Assembly processing area", ""]
+            ],
+            [
+                [1, "R01-001", "Khu vực gia công kim loại tấm", ""],
+                [2, "R01-002", "Khu vực hàn", ""],
+                [3, "R01-003", "Khu gia công lắp ráp", ""]
+            ],
+            [
+                [1, "R01-001", "板金加工エリア", ""],
+                [2, "R01-002", "溶接加工エリア", ""],
+                [3, "R01-003", "組み立て加工エリア", ""]
+            ]
+        ];
+        var language = [
+            [
+                "AREA LIST",
+                "ID",
+                "Area Name",
+                "Remark",
+                "Back"
+            ],
+            [
+                "DANH SÁCH KHU VỰC",
+                "ID",
+                "Tên khu vực",
+                "Ghi chú",
+                "Trở về"
+            ],
+            [
+                "エリア一覧",
+                "管理番号",
+                "エリア名",
+                "備考",
+                "戻る"
+            ]
+        ]
+
+        /*
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("areaName").innerHTML = language[lang][2];
+            document.getElementById("remark").innerHTML = language[lang][3];
+            document.getElementById("backBtn").innerHTML = language[lang][4];
+        }
+
         /**
-   * MOVING TO ANOTHER PAGE
-*/
+            * MOVING TO ANOTHER PAGE
+        */
         function movePage(page) {
             window.location.href = page;
         }
 
         /**
-* GENERATE TABLE
-*/
-        function generateTable(listItem, tableName) {
-            const table = document.getElementById(tableName);
+            * GENERATE TABLE
+        */
+        function generateTable(listItem) {
+            const table = document.getElementById("eriaIchiran");
             const tbody = document.createElement("tbody");
             table.appendChild(tbody);
             for (let i = 0; i < listItem.length; i++) {
@@ -113,20 +171,17 @@
                 tbody.appendChild(row);
             }
         }
-        
-        /*****  VIEW VARIABLE  *****/
-        const areaList = [
-            [1, "R01-001", "板金加工エリア", ""],
-            [2, "R01-002", "板金加工エリア", ""],
-            [3, "R01-003", "組み立て加工エリア", ""]
-        ]
 
         /*
-           * ONCLICK ACTION
+            * ONCLICK ACTION
         */
         function onClickAction() {
             document.getElementById("logoutOption").onclick = function () {
                 movePage('./login.html')
+            }
+
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
             }
 
             document.getElementById("backBtn").onclick = function () {
@@ -134,20 +189,33 @@
             }
 
             $('#eriaIchiran').on('click', 'tbody tr', function () {
-                sessionStorage.setItem("area", areaList[this.id][2]);
+                sessionStorage.setItem("area", areaList[parseInt(sessionStorage.getItem("language"))][this.id][2]);
                 movePage("./equipment_daily_check_list.html");
             })
 
         }
-
-
 
         /*
            * ONLOAD ACTION
         */
         function onLoadAction() {
             onClickAction();
-            generateTable(areaList, "eriaIchiran")
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            generateTable(areaList[parseInt(sessionStorage.getItem("language"))]);
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
         }
 
         window.onload = onLoadAction;

@@ -24,7 +24,7 @@
 <body>
 	<div id="backgroundPage">
 		<div class="container-mainform">
-			<!-- <div class="dropdown select-role">
+			<div class="dropdown select-role">
 				<div class="btn-menu btn-secondary dropdown-toggle" type="button" id="dropdownSelectRole"
 					data-bs-toggle="dropdown" aria-expanded="false">
 					<img src="imgs/icons/ic-jp.png" alt="" id="language" value="jp">
@@ -42,11 +42,11 @@
 					</li>
 					<li id="lgJp" hidden>
 						<a class="dropdown-item">
-							<img src="imgs/icons/ic-jp.png" alt=""><span class="text m-l-10">日本</span>
+							<img src="imgs/icons/ic-jp.png" alt=""><span class="text m-l-10">日本語</span>
 						</a>
 					</li>
 				</ul>
-			</div> -->
+			</div>
 
 			<div class="wrap-mainform m-t-70">
 				<span class="mainform-form-title">
@@ -64,12 +64,11 @@
 								</div>
 
 								<select class="custom-select combobox text" id="cbb_bumon">
-									<option value="0">電気工場</option>
-									<option value="1">印刷工場</option>
-									<option value="2">石油精製工場</option>
-									<option value="3">化学工場</option>
-									<option value="4">鉄鋼工場</option>
-									<option value="5">機械工房</option>
+									<option value="0" id="opBumon1">総務</option>
+									<option value="1" id="opBumon2">業務</option>
+									<option value="2" id="opBumon3">品質保証</option>
+									<option value="3" id="opBumon4">製造１</option>
+									<option value="4" id="opBumon5">製造２</option>
 									<option value="-" selected hidden></option>
 								</select>
 							</div>
@@ -84,12 +83,11 @@
 								</div>
 
 								<select class="custom-select combobox text" id="cbb_user">
-									<option value="0">マネジャー</option>
-									<option value="1">課長</option>
-									<option value="2">リーダー</option>
-									<option value="3">副チームリーダー</option>
-									<option value="4">ワーカー</option>
-									<option value="5">品質管理スタッフ</option>
+									<option value="0" id="opUser1">Nguyen Van Duc</option>
+									<option value="1" id="opUser2">Nguyen Thi Huong</option>
+									<option value="2" id="opUser3">Ngo Thi Hue</option>
+									<option value="3" id="opUser4">Nguyen Tien Dung</option>
+									<option value="4" id="opUser5">Nguyen Hoang Long</option>
 									<option value="-" selected hidden></option>
 								</select>
 							</div>
@@ -157,12 +155,61 @@
 	<script src="./fonts/fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
 	<!-- <script type="module" src="./js/login.js"></script> -->
 	<script>
-		
+
 
 		/*****  VIEW VARIABLE  *****/
 		/* modal */
 		const modal = document.getElementById("myModal");
 		var title;
+		var language = [
+			[
+				"Factory information aggregation system",
+				"Department",
+				"User",
+				"Password",
+				"Remember password",
+				"Login"
+			],
+			[
+				"Hệ thống tổng hợp thông tin nhà máy",
+				"Phòng ban",
+				"Người dùng",
+				"Mật khẩu",
+				"Nhớ mật khẩu",
+				"Đăng nhập"
+			],
+			[
+				"（工場情報集約システム）",
+				"部門",
+				"ユーザー",
+				"パスワード",
+				"パスワードを保存",
+				"ログイン"
+			]
+		];
+		var bumon = [
+			[
+				"Administration",
+				"Business",
+				"QA",
+				"Production 1",
+				"Production 2"
+			],
+			[
+				"Hành chánh",
+				"Kinh doanh",
+				"QA",
+				"Sản xuất 1",
+				"Sản xuất 2"
+			],
+			[
+				"総務",
+				"業務",
+				"品質保証",
+				"製造１",
+				"製造２"
+			]
+		]
 
 		/**
 		* INITIALIZE MODAL
@@ -254,9 +301,29 @@
 		function login() {
 			let password = document.getElementById("pass");
 			if (password.value == "") {
-				setupModal("error", null, "入力値は正しくありません。再入力してください。", "閉じる", null, null, false);
+				switch (parseInt(sessionStorage.getItem("language"))) {
+					case 0:
+						setupModal("error", null, "The input value is incorrect. Please re-enter.", "Close", null, null, false);
+						break;
+					case 1:
+						setupModal("error", null, "Giá trị đầu vào không chính xác. Vui lòng nhập lại.", "Đóng", null, null, false);
+						break;
+					case 2:
+						setupModal("error", null, "入力値は正しくありません。再入力してください。", "閉じる", null, null, false);
+						break;
+				}
 			} else {
-				setupModal("load", null, "しばらくお待ちください。。。", null, null, null, false);
+				switch (parseInt(sessionStorage.getItem("language"))) {
+					case 0:
+						setupModal("load", null, "Please wait...", null, null, null, false);
+						break;
+					case 1:
+						setupModal("load", null, "Vui lòng chờ...", null, null, null, false);
+						break;
+					case 2:
+						setupModal("load", null, "しばらくお待ちください。。。", null, null, null, false);
+						break;
+				}
 				checkUser(password.value);
 			}
 		}
@@ -276,7 +343,17 @@
 				movePage("./menu.html")
 			}
 			else {
-				setupModal("error", null, "ログインに失敗しました。", null, StringCS.OK, null, false);
+				switch (parseInt(sessionStorage.getItem("language"))) {
+					case 0:
+						setupModal("error", null, "Login failed.", null, "OK", null, false);
+						break;
+					case 1:
+						setupModal("error", null, "Đăng nhập thất bại.", null, "OK", null, false);
+						break;
+					case 2:
+						setupModal("error", null, "ログインに失敗しました。", null, "OK", null, false);
+						break;
+				}
 				document.getElementById("pass").value = "";
 			}
 		}
@@ -287,65 +364,73 @@
 		function onclickAction() {
 			document.getElementById("login-button").onclick = login;
 
-		// 	document.getElementById("lgEn").onclick = function () {
-		// 		document.getElementById("language").setAttribute("src", "imgs/icons/ic-en.png");
-		// 		document.getElementById("language").setAttribute("value", "en");
-		// 		document.getElementById("lgEn").setAttribute("hidden", "");
-		// 		document.getElementById("lgVi").removeAttribute("hidden");
-		// 		document.getElementById("lgJp").removeAttribute("hidden");
-		// 		getLanguageData("../lib/lang/en.json");
-		// 		sessionStorage.setItem("language", "en");
-		// 	}
+			document.getElementById("lgEn").onclick = function () {
+				setIconEnglish();
+				setLanguageData(0);
+				sessionStorage.setItem("language", 0);
+			}
 
-		// 	document.getElementById("lgVi").onclick = function () {
-		// 		document.getElementById("language").setAttribute("src", "imgs/icons/ic-vi.png");
-		// 		document.getElementById("language").setAttribute("value", "vi");
-		// 		document.getElementById("lgVi").setAttribute("hidden", "");
-		// 		document.getElementById("lgEn").removeAttribute("hidden");
-		// 		document.getElementById("lgJp").removeAttribute("hidden");
-		// 		getLanguageData("../lib/lang/vi.json");
-		// 		sessionStorage.setItem("language", "vi");
-		// 	}
+			document.getElementById("lgVi").onclick = function () {
+				setIconVietnamese();
+				setLanguageData(1);
+				sessionStorage.setItem("language", 1);
+			}
 
-		// 	document.getElementById("lgJp").onclick = function () {
-		// 		document.getElementById("language").setAttribute("src", "imgs/icons/ic-jp.png");
-		// 		document.getElementById("language").setAttribute("value", "jp");
-		// 		document.getElementById("lgJp").setAttribute("hidden", "");
-		// 		document.getElementById("lgEn").removeAttribute("hidden");
-		// 		document.getElementById("lgVi").removeAttribute("hidden");
-		// 		getLanguageData("../lib/lang/jp.json");
-		// 		sessionStorage.setItem("language", "jp");
-		// 	}
-		}
-
-		/**
-		   * GET LANGUAGE DATA
-		*/
-		function getLanguageData(url) {
-			fetch(url)
-				.then((res) => res.json())
-				.then((data) => {
-					setLanguageData(data)
-				})
+			document.getElementById("lgJp").onclick = function () {
+				setIconJapanese();
+				setLanguageData(2);
+				sessionStorage.setItem("language", 2);
+			}
 		}
 
 		/**
 		   * SET LANGUAGE DATA
 		*/
-		function setLanguageData(data) {
-			document.getElementById("login-title").innerHTML = data.login.title;
-			document.getElementById("login-department").innerHTML = data.login.department;
-			document.getElementById("login-user").innerHTML = data.login.user;
-			document.getElementById("login-password").innerHTML = data.login.password;
-			document.getElementById("login-remember-pw").innerHTML = data.login.rememberPw;
-			document.getElementById("login-button").innerHTML = data.login.login;
+		function setLanguageData(lang) {
+			document.getElementById("login-title").innerHTML = language[lang][0];
+			document.getElementById("login-department").innerHTML = language[lang][1];
+			document.getElementById("login-user").innerHTML = language[lang][2];
+			document.getElementById("login-password").innerHTML = language[lang][3];
+			document.getElementById("login-remember-pw").innerHTML = language[lang][4];
+			document.getElementById("login-button").innerHTML = language[lang][5];
+			document.getElementById("opBumon1").innerHTML = bumon[lang][0];
+			document.getElementById("opBumon2").innerHTML = bumon[lang][1];
+			document.getElementById("opBumon3").innerHTML = bumon[lang][2];
+			document.getElementById("opBumon4").innerHTML = bumon[lang][3];
+			document.getElementById("opBumon5").innerHTML = bumon[lang][4];
 		}
 
-		/**
-		   * ONCHANGE ACTION
+		/*
+			* SET ICON ENGLISH
 		*/
-		function onChangeAction() {
-			// console.log(document.getElementById("language").getAttribute("value"));
+		function setIconEnglish() {
+			document.getElementById("language").setAttribute("src", "imgs/icons/ic-en.png");
+			document.getElementById("language").setAttribute("value", "en");
+			document.getElementById("lgEn").setAttribute("hidden", "");
+			document.getElementById("lgVi").removeAttribute("hidden");
+			document.getElementById("lgJp").removeAttribute("hidden");
+		}
+
+		/*
+			* SET ICON VIETNAMESE
+		*/
+		function setIconVietnamese() {
+			document.getElementById("language").setAttribute("src", "imgs/icons/ic-vi.png");
+			document.getElementById("language").setAttribute("value", "vi");
+			document.getElementById("lgVi").setAttribute("hidden", "");
+			document.getElementById("lgEn").removeAttribute("hidden");
+			document.getElementById("lgJp").removeAttribute("hidden");
+		}
+
+		/*
+			* SET ICON JAPANESE
+		*/
+		function setIconJapanese() {
+			document.getElementById("language").setAttribute("src", "imgs/icons/ic-jp.png");
+			document.getElementById("language").setAttribute("value", "jp");
+			document.getElementById("lgJp").setAttribute("hidden", "");
+			document.getElementById("lgEn").removeAttribute("hidden");
+			document.getElementById("lgVi").removeAttribute("hidden");
 		}
 
 		/**
@@ -354,6 +439,25 @@
 		function onLoadAction() {
 			onclickAction();
 			onChangeAction();
+			if (parseInt(sessionStorage.getItem("language")) == "NaN") {
+				sessionStorage.setItem("language", 2)
+			}
+			else {
+				switch (parseInt(sessionStorage.getItem("language"))) {
+					case 0:
+						setIconEnglish();
+						setLanguageData(0);
+						break;
+					case 1:
+						setIconJapanese();
+						setLanguageData(1);
+						break;
+					case 2:
+						setIconJapanese();
+						setLanguageData(2);
+						break;
+				}
+			}
 		}
 
 		window.onload = onLoadAction;

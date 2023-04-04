@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>メモ追加</title>
+    <title id="title">メモ追加</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-memo.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -40,7 +46,7 @@
                 </span>
 
                 <p class="divider-text">
-                    <span class="title-group">板金加工エリア　＞　折り曲げ機</span>
+                    <span class="title-group" id="titleGroup"></span>
                 </p>
 
                 <div class="row content ed-v">
@@ -49,7 +55,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">管理番号</span>
+                                        <span class="input-group-text mw175 text jc-c" id="idNumber">管理番号</span>
                                     </div>
 
                                     <input type="text" class="form-control ta-l text t-ip" id="controlNumber"
@@ -62,7 +68,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">メーカー
+                                        <span class="input-group-text mw175 text jc-c" id="makerCom">メーカー
                                         </span>
                                     </div>
 
@@ -75,7 +81,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">購入日
+                                        <span class="input-group-text mw175 text jc-c" id="purchase">購入日
                                         </span>
                                     </div>
 
@@ -89,7 +95,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">管理責任者
+                                        <span class="input-group-text mw175 text jc-c" id="supervisor">管理責任者
                                         </span>
                                     </div>
 
@@ -103,11 +109,11 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">タイトル
+                                        <span class="input-group-text mw175 text jc-c" id="memoCap">タイトル
                                         </span>
                                     </div>
 
-                                    <input type="text" class="form-control ta-l text t-ip" id="title" />
+                                    <input type="text" class="form-control ta-l text t-ip" id="memoTitle" />
                                 </div>
                             </div>
                         </div>
@@ -156,12 +162,12 @@
 
                         <div class="button-area p-b-10">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-5">
                                     <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-2">
                                 </div>
-                                <div class="col-4">
+                                <div class="col-5">
                                     <button type="button" class="btn btn-default text-center"
                                         id="memoTsuikaBtn">登録</button>
                                 </div>
@@ -214,12 +220,57 @@
 
     <!-- <script type="module" src="./js/memo.js"></script> -->
     <script>
-        /**
-* INITIALIZE MODAL
-*
-*
-*/
+        var language = [
+            [
+                "ADD MEMO",
+                "ID",
+                "Maker",
+                "Purchase date",
+                "Supervisor",
+                "Title",
+                "Back",
+                "Register"
+            ],
+            [
+                "THÊM GHI CHÚ",
+                "ID",
+                "Công ty sản xuất",
+                "Ngày mua",
+                "Quản lý",
+                "Tiêu đề",
+                "Trở về",
+                "Đăng ký"
+            ],
+            [
+                "メモ追加",
+                "管理番号",
+                "メーカー",
+                "購入日",
+                "管理責任者",
+                "タイトル",
+                "戻る",
+                "登録"
+            ]
+        ];
 
+        /**
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("makerCom").innerHTML = language[lang][2];
+            document.getElementById("purchase").innerHTML = language[lang][3];
+            document.getElementById("supervisor").innerHTML = language[lang][4];
+            document.getElementById("memoCap").innerHTML = language[lang][5];
+            document.getElementById("backBtn").innerHTML = language[lang][6];
+            document.getElementById("memoTsuikaBtn").innerHTML = language[lang][7];
+        }
+
+        /**
+            * INITIALIZE MODAL
+        */
         function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
             // init view
             var modal = document.getElementById("myModal");
@@ -301,8 +352,8 @@
         }
 
         /**
-* MOVING TO ANOTHER PAGE
-*/
+            * MOVING TO ANOTHER PAGE
+        */
         function movePage(page) {
             window.location.href = page;
         }
@@ -311,11 +362,22 @@
            * SET DATA ACTION
         */
         function setDataDetail() {
+            setLanguage(parseInt(sessionStorage.getItem("language")));
             document.getElementById("controlNumber").value = sessionStorage.getItem("equipmentName");
             document.getElementById("maker").value = "A社";
-            document.getElementById("purchaseDate").value = "2019年7月1日";
             document.getElementById("administrator").value = "Nguyen Van Dung";
-            document.getElementById("title").value = sessionStorage.getItem("memoTitle");
+            document.getElementById("memoTitle").value = sessionStorage.getItem("memoTitle");
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("purchaseDate").value = "01/07/2019";
+                    break;
+                case 1:
+                    document.getElementById("purchaseDate").value = "01/07/2019";
+                    break;
+                case 2:
+                    document.getElementById("purchaseDate").value = "2019年7月1日";
+                    break;
+            }
         }
 
         /**
@@ -345,8 +407,6 @@
             }
         }
 
-
-
         /**
            * ONCLICK ACTION
         */
@@ -355,12 +415,26 @@
                 movePage('./login.html')
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./equipment_detail.html")
             }
 
             document.getElementById("memoTsuikaBtn").onclick = function () {
-                setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                switch (parseInt(sessionStorage.getItem("language"))) {
+                    case 0:
+                        setupModal("success", null, "Data saved successfully.", null, "OK", null, false);
+                        break;
+                    case 1:
+                        setupModal("success", null, "Dữ liệu đã lưu thành công.", null, "OK", null, false);
+                        break;
+                    case 2:
+                        setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                        break;
+                }
                 document.getElementById("buttonAreaModal").onclick = function () {
                     movePage("./equipment_detail.html");
                 }
@@ -377,7 +451,21 @@
         function onLoadAction() {
             onClickAction();
             setDataDetail();
-            // console.log(sessionStorage.getItem("memoTitle"))
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
+            document.getElementById("titleGroup").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
         }
 
         window.onload = onLoadAction;

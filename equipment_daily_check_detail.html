@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>メモ追加</title>
+    <title id="title">メモ追加</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-detail.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -40,7 +46,7 @@
                 </span>
 
                 <p class="divider-text">
-                    <span class="title-group">板金加工エリア　＞　折り曲げ機</span>
+                    <span class="title-group" id="titleGroup"></span>
                 </p>
 
                 <div class="row content ed-v" style="align-items: normal">
@@ -49,7 +55,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">管理番号</span>
+                                        <span class="input-group-text mw135 text jc-c" id="idNumber">管理番号</span>
                                     </div>
 
                                     <input type="text" class="form-control ta-l text t-ip" id="controlNumber"
@@ -67,7 +73,8 @@
                                 <div class="can-toggle can-toggle--size-large">
                                     <input id="status" type="checkbox">
                                     <label for="status">
-                                        <div class="can-toggle__switch" data-checked="はい" data-unchecked="いいえ"></div>
+                                        <div id="statusBtn" class="can-toggle__switch" data-checked=""
+                                            data-unchecked=""></div>
                                     </label>
                                 </div>
                             </div>
@@ -77,7 +84,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">タイトル
+                                        <span class="input-group-text mw135 text jc-c" id="titleBtn">タイトル
                                         </span>
                                     </div>
 
@@ -185,18 +192,57 @@
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- <script type="module" src="./js/equipment_daily_check_detail.js"></script> -->
     <script>
+        var language = [
+            [
+                "ADD MEMO",
+                "ID",
+                "Title",
+                "Back",
+                "Register"
+            ],
+            [
+                "THÊM GHI CHÚ",
+                "ID",
+                "Tiêu đề",
+                "Trở về",
+                "Đăng ký"
+            ],
+            [
+                "メモ追加",
+                "管理番号",
+                "タイトル",
+                "戻る",
+                "登録"
+            ]
+        ];
+
         /**
-* MOVING TO ANOTHER PAGE
-*/
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("titleBtn").innerHTML = language[lang][2];
+            document.getElementById("backBtn").innerHTML = language[lang][3];
+            document.getElementById("memoTsuikaBtn").innerHTML = language[lang][4];
+            document.getElementById("controlNumber").value = sessionStorage.getItem("controlNumber");
+            document.getElementById("confirm").innerHTML = sessionStorage.getItem("inspectionDetail");
+        }
+
+        /**
+            * MOVING TO ANOTHER PAGE
+        */
         function movePage(page) {
             window.location.href = page;
         }
 
-               /**
-   * INITIALIZE MODAL
-*/
 
-function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
+
+        /**
+            * INITIALIZE MODAL
+        */
+        function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
             // init view
             var modal = document.getElementById("myModal");
             var imageModal = document.getElementsByClassName("modal-image")[0];
@@ -280,14 +326,48 @@ function setupModal(status, title, message, textButton0, textButton1, textButton
            * SET DATA ACTION
         */
         function setDataDetail() {
-            document.getElementById("controlNumber").value = sessionStorage.getItem("controlNumber");
-            document.getElementById("confirm").innerHTML = sessionStorage.getItem("inspectionDetail");
-            document.getElementById("comment").value = "溶接機から異音あり";
-            document.getElementById("kontentsu").innerHTML = "調整器から小さく「シューシュー」という音が聞こえる <br>" +
-                "ここのところガスの減りが速い気がしていた。<br>" +
-                "日常点検をした方がよいかもしれない。";
-            if (sessionStorage.getItem("status") == "いいえ") {
-                document.getElementById("status").setAttribute("checked", "");
+            document.getElementById("titleGroup").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("comment").value = "Abnormal noise from welding machine";
+                    document.getElementById("kontentsu").innerHTML = "A small hissing sound can be heard from the regulator, " +
+                        "I've been feeling like the gas is running out fast these days.<br>" +
+                        "It might be better to do a daily checkup.";
+                    document.getElementById("statusBtn").setAttribute("data-checked", "Yes");
+                    document.getElementById("statusBtn").setAttribute("data-unchecked", "No");
+                    if (sessionStorage.getItem("status") == "No") {
+                        document.getElementById("status").setAttribute("checked", "");
+                    }
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("comment").value = "Tiếng ồn bất thường từ máy hàn";
+                    document.getElementById("kontentsu").innerHTML = 'Điều hòa phát ra tiếng "vút" nhỏ, ' +
+                        "gần đây tôi cảm thấy xăng nhanh hết.<br>" +
+                        "Bạn có thể muốn kiểm tra hàng ngày.";
+                    document.getElementById("statusBtn").setAttribute("data-checked", "Có");
+                    document.getElementById("statusBtn").setAttribute("data-unchecked", "Không");
+                    if (sessionStorage.getItem("status") == "Không") {
+                        document.getElementById("status").setAttribute("checked", "");
+                    }
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("comment").value = "溶接機から異音あり";
+                    document.getElementById("kontentsu").innerHTML = "調整器から小さく「シューシュー」という音が聞こえる <br>" +
+                        "ここのところガスの減りが速い気がしていた。<br>" +
+                        "日常点検をした方がよいかもしれない。";
+                    document.getElementById("statusBtn").setAttribute("data-checked", "はい");
+                    document.getElementById("statusBtn").setAttribute("data-unchecked", "いいえ");
+                    if (sessionStorage.getItem("status") == "いいえ") {
+                        document.getElementById("status").setAttribute("checked", "");
+                    }
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
             }
         }
 
@@ -326,19 +406,44 @@ function setupModal(status, title, message, textButton0, textButton1, textButton
                 movePage('./login.html')
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./daily_check_list.html");
             }
 
             document.getElementById("memoTsuikaBtn").onclick = function () {
-                if (document.getElementById("status").hasAttribute("checked")) {
-                    sessionStorage.setItem("status", "いいえ");
+                switch (parseInt(sessionStorage.getItem("language"))) {
+                    case 0:
+                        if (document.getElementById("status").hasAttribute("checked")) {
+                            sessionStorage.setItem("status", "No");
+                        }
+                        else {
+                            sessionStorage.setItem("status", "Yes");
+                        }
+                        setupModal("success", null, "Data saved successfully.", null, "OK", null, false);
+                        break;
+                    case 1:
+                        if (document.getElementById("status").hasAttribute("checked")) {
+                            sessionStorage.setItem("status", "Không");
+                        }
+                        else {
+                            sessionStorage.setItem("status", "Có");
+                        }
+                        setupModal("success", null, "Dữ liệu đã lưu thành công.", null, "OK", null, false);
+                        break;
+                    case 2:
+                        if (document.getElementById("status").hasAttribute("checked")) {
+                            sessionStorage.setItem("status", "いいえ");
+                        }
+                        else {
+                            sessionStorage.setItem("status", "はい");
+                        }
+                        setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                        break;
                 }
-                else {
-                    sessionStorage.setItem("status", "はい");
-                }
-
-                setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
                 document.getElementById("buttonAreaModal").onclick = function () {
                     movePage("./daily_check_list.html");
                 }

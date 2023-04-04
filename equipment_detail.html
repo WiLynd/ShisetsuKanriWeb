@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>設備詳細</title>
+    <title id="title">設備詳細</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-detail.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -40,7 +46,7 @@
                 </span>
 
                 <p class="divider-text">
-                    <span class="title-group" id="title"></span>
+                    <span class="title-group" id="titleGroup"></span>
                 </p>
 
                 <div class="row content ed-v">
@@ -56,11 +62,11 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">年次点検
+                                        <span class="input-group-text mw175 text jc-c" id="yearlyCheck">年次点検
                                         </span>
                                     </div>
 
-                                    <button type="button" class="btn btn-default text memo-btn">
+                                    <button type="button" class="btn btn-default text memo-btn" id="startCheck">
                                         点検開始
                                     </button>
                                 </div>
@@ -74,7 +80,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">前回点検日
+                                        <span class="input-group-text mw175 text jc-c" id="previousDate">前回点検日
                                         </span>
                                     </div>
 
@@ -87,7 +93,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">次回点検日
+                                        <span class="input-group-text mw175 text jc-c" id="nextDate">次回点検日
                                         </span>
                                     </div>
 
@@ -100,7 +106,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">管理番号</span>
+                                        <span class="input-group-text mw175 text jc-c" id="idNumber">管理番号</span>
                                     </div>
 
                                     <input type="text" class="form-control ta-l text t-ip" id="controlNumber"
@@ -113,7 +119,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">メーカー</span>
+                                        <span class="input-group-text mw175 text jc-c" id="makerCom">メーカー</span>
                                     </div>
 
                                     <input type="text" class="form-control ta-l text t-ip" id="maker" disabled />
@@ -125,7 +131,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">購入日</span>
+                                        <span class="input-group-text mw175 text jc-c" id="purchase">購入日</span>
                                     </div>
 
                                     <input type="text" class="form-control ta-c text t-ip" id="purchaseDate" disabled />
@@ -137,7 +143,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">管理責任者</span>
+                                        <span class="input-group-text mw175 text jc-c" id="supervisor">管理責任者</span>
                                     </div>
 
                                     <input type="text" class="form-control ta-l text t-ip" id="administrator"
@@ -151,7 +157,7 @@
                             <div class="col-12">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text mw135 text jc-c">メモ</span>
+                                        <span class="input-group-text mw175 text jc-c" id="memo">メモ</span>
                                     </div>
                                     <input type="button" class="btn memo-btn text t-ip" value="メモ追加" id="memoBtn">
                                 </div>
@@ -175,14 +181,12 @@
 
                 <div class="button-area p-b-10">
                     <div class="row ed-v">
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="setsubiShosaiBtn">登録</button>
                         </div>
                     </div>
@@ -224,13 +228,90 @@
     <script>
         /*****  VIEW VARIABLE  *****/
         const memoList = [
-            ["2020年1月10日", "異音がしたため確認したが目立った…", ""],
-            ["2021年11月22日", "ベアリング交換", ""],
+            [
+                ["10/01/2020", "I checked it because there was an abnormal noise, but it was noticeable...", ""],
+                ["22/11/2021", "Bearing replacement", ""],
+            ],
+            [
+                ["10/01/2020", "Kiểm tra vì có tiếng ồn bất thường, nhưng nó rất đáng chú ý...", ""],
+                ["22/11/2021", "Thay thế vòng bi", ""],
+            ],
+            [
+                ["2020年1月10日", "異音がしたため確認したが目立った…", ""],
+                ["2021年11月22日", "ベアリング交換", ""],
+            ]
+        ];
+        var language = [
+            [
+                "FACILITY DETAILS",
+                "Previous check date",
+                "Next check date",
+                "ID",
+                "Maker",
+                "Purchase date",
+                "Supervisor",
+                "Memo",
+                "Add memo",
+                "Yearly check",
+                "Start check",
+                "Back",
+                "Register"
+            ],
+            [
+                "CHI TIẾT THIẾT BỊ",
+                "Ngày kiểm tra trước",
+                "Ngày kiểm tra sau",
+                "ID",
+                "Công ty sản xuất",
+                "Ngày mua",
+                "Quản lý",
+                "Ghi chú",
+                "Thêm ghi chú",
+                "Kiểm tra hằng năm",
+                "Bắt đầu kiểm tra",
+                "Trở về",
+                "Đăng ký"
+            ],
+            [
+                "設備詳細",
+                "前回点検日",
+                "次回点検日",
+                "管理番号",
+                "メーカー",
+                "購入日",
+                "管理責任者",
+                "メモ",
+                "メモ追加",
+                "年次点検",
+                "点検開始",
+                "戻る",
+                "登録"
+            ]
         ];
 
         /**
-   * MOVING TO ANOTHER PAGE
-*/
+           * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("previousDate").innerHTML = language[lang][1];
+            document.getElementById("nextDate").innerHTML = language[lang][2];
+            document.getElementById("idNumber").innerHTML = language[lang][3];
+            document.getElementById("makerCom").innerHTML = language[lang][4];
+            document.getElementById("purchase").innerHTML = language[lang][5];
+            document.getElementById("supervisor").innerHTML = language[lang][6];
+            document.getElementById("memo").innerHTML = language[lang][7];
+            document.getElementById("memoBtn").value = language[lang][8];
+            document.getElementById("yearlyCheck").innerHTML = language[lang][9];
+            document.getElementById("startCheck").innerHTML = language[lang][10];
+            document.getElementById("backBtn").innerHTML = language[lang][11];
+            document.getElementById("setsubiShosaiBtn").innerHTML = language[lang][12];
+        }
+
+        /**
+            * MOVING TO ANOTHER PAGE
+        */
         function movePage(page) {
             window.location.href = page;
         }
@@ -239,19 +320,34 @@
            * SET DATA ACTION
         */
         function setDataDetail() {
-            document.getElementById("lastCheck").value = "2022年8月1日";
-            document.getElementById("nextCheck").value = "2023年9月1日";
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("lastCheck").value = "01/08/2022";
+                    document.getElementById("nextCheck").value = "01/09/2023";
+                    document.getElementById("purchaseDate").value = "01/07/2019";
+                    break;
+                case 1:
+                    document.getElementById("lastCheck").value = "01/08/2022";
+                    document.getElementById("nextCheck").value = "01/09/2023";
+                    document.getElementById("purchaseDate").value = "01/07/2019";
+                    break;
+                case 2:
+                    document.getElementById("lastCheck").value = "2022年8月1日";
+                    document.getElementById("nextCheck").value = "2023年9月1日";
+                    document.getElementById("purchaseDate").value = "2019年7月1日";
+                    break;
+            }
+
             document.getElementById("controlNumber").value = sessionStorage.getItem("equipmentName");
             document.getElementById("maker").value = "A社";
-            document.getElementById("purchaseDate").value = "2019年7月1日";
             document.getElementById("administrator").value = "Nguyen Van Dung";
         }
 
         /**
            * GENERATE TABLE
         */
-        function generateTable(listItem, tableName) {
-            const table = document.getElementById(tableName);
+        function generateTable(listItem) {
+            const table = document.getElementById("memoTable");
             const tbody = document.createElement("tbody");
             table.appendChild(tbody);
             for (let i = 0; i < listItem.length; i++) {
@@ -272,7 +368,17 @@
                     else {
                         cell.classList.add("col-1");
                         button.id = i;
-                        button.append("編集");
+                        switch (parseInt(sessionStorage.getItem("language"))) {
+                            case 0:
+                                button.append("Edit");
+                                break;
+                            case 1:
+                                button.append("Sửa");
+                                break;
+                            case 2:
+                                button.append("編集");
+                                break;
+                        }
                         button.classList.add("btn");
                         button.classList.add("btn-default");
                         button.classList.add("detail-btn");
@@ -287,11 +393,8 @@
         }
 
         /**
-   * INITIALIZE MODAL
-   *
-   *
-*/
-
+            * INITIALIZE MODAL
+        */
         function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
             // init view
             var modal = document.getElementById("myModal");
@@ -380,6 +483,10 @@
                 movePage('./login.html')
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./equipment_management_list.html")
             }
@@ -389,15 +496,26 @@
                 movePage("./memo.html")
             }
 
-            document.getElementById("setsubiShosaiBtn").onclick = async function () {
-                setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
-                document.getElementById("buttonAreaModal").onclick = function () {
-                    movePage("./equipment_management_list.html");
+            document.getElementById("setsubiShosaiBtn").onclick = function () {
+                switch (parseInt(sessionStorage.getItem("language"))) {
+                    case 0:
+                        setupModal("success", null, "Data saved successfully.", null, "OK", null, false);
+                        break;
+                    case 1:
+                        setupModal("success", null, "Dữ liệu đã lưu thành công.", null, "OK", null, false);
+                        break;
+                    case 2:
+                        setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                        break;
                 }
             }
 
+            document.getElementById("buttonAreaModal").onclick = function () {
+                movePage("./equipment_management_list.html");
+            }
+
             $('#memoTable').on('click', 'tbody tr td button', function () {
-                sessionStorage.setItem("memoTitle", memoList[this.id][1]);
+                sessionStorage.setItem("memoTitle", memoList[parseInt(sessionStorage.getItem("language"))][this.id][1]);
                 movePage("./memo.html");
             })
         }
@@ -408,8 +526,23 @@
         function onLoadAction() {
             onClickAction();
             setDataDetail();
-            generateTable(memoList, "memoTable")
-            document.getElementById("title").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            generateTable(memoList[parseInt(sessionStorage.getItem("language"))]);
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
+            document.getElementById("titleGroup").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
         }
 
         window.onload = onLoadAction;

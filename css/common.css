@@ -226,8 +226,15 @@ input::-webkit-inner-spin-button {
 */
 .select-role {
 	position: absolute;
-	top: 1.5%;
-	right: 2%;
+	top: 10px;
+	right: 10px;
+	z-index: 2;
+}
+
+.select-language {
+	position: absolute;
+	top: 15px;
+	right: 80px;
 	z-index: 2;
 }
 
@@ -264,12 +271,16 @@ input::-webkit-inner-spin-button {
 
 .ic-dropdown {
 	font-size: 25px;
-	margin-right: 20px;
+	margin-right: 10px;
 	color: var(--icon-color);
 }
 
 .logout {
 	color: var(--gray-color);
+}
+
+.menu {
+	color: var(--icon-color);
 }
 
 

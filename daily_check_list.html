@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>点検項目一覧</title>
+    <title id="title">点検項目一覧</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-list.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -39,7 +45,7 @@
                     点検項目一覧
                 </span>
                 <p class="divider-text">
-                    <span class="title-group" id="title"></span>
+                    <span class="title-group" id="titleGroup"></span>
                 </p>
 
                 <div class="row content">
@@ -50,19 +56,19 @@
                                     <th class="col-1">
                                         No.
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-2" id="idNumber">
                                         管理番号
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-3" id="class">
                                         分類
                                     </th>
-                                    <th class="col-8">
+                                    <th class="col-7" id="checkItems">
                                         点検内容
                                     </th>
-                                    <th class="col-3">
+                                    <th class="col-3" id="checkResults">
                                         点検結果
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-2" id="remark">
                                         備考
                                     </th>
                                 </tr>
@@ -73,14 +79,12 @@
 
                 <div class="button-area p-b-10">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="torokuBtn">登録</button>
                         </div>
                     </div>
@@ -123,15 +127,73 @@
     <script>
         /*****  VIEW VARIABLE  *****/
         const dailyCheckList = [
-            [1, "WP1CK01", "外観検査", "ホース継手台およびパイプにひび割れや腐食はないか？", "はい", ""],
-            [2, "WP1CK02", "外観検査", "バルブなどに損傷はないか？", "はい", ""],
-            [3, "WP1CK03", "火炎の状態", "切断酸素気流は正常か？", "いいえ", ""],
+            [
+                [1, "WP1CK01", "Visual inspection", "Are there any cracks or corrosion in the hose coupling bases and pipes?", "Yes", ""],
+                [2, "WP1CK02", "Visual inspection", "Is there any damage to valves, etc.?", "Yes", ""],
+                [3, "WP1CK03", "State of flame", "Is cutting oxygen flow normal?", "No", ""],
+            ],
+            [
+                [1, "WP1CK01", "Trực quan", "Có bất kỳ vết nứt hoặc ăn mòn nào ở đế khớp nối và đường ống không?", "Có", ""],
+                [2, "WP1CK02", "Trực quan", "Có bất kỳ thiệt hại ở van không, vv?", "Có", ""],
+                [3, "WP1CK03", "Trạng thái lửa", "Lưu lượng oxy lúc hàn cắt có bình thường không?", "Không", ""],
+            ],
+            [
+                [1, "WP1CK01", "外観検査", "ホース継手台およびパイプにひび割れや腐食はないか？", "はい", ""],
+                [2, "WP1CK02", "外観検査", "バルブなどに損傷はないか？", "はい", ""],
+                [3, "WP1CK03", "火炎の状態", "切断酸素気流は正常か？", "いいえ", ""],
+            ]
+        ];
+        var language = [
+            [
+                "INSPECTION ITEM LIST",
+                "ID",
+                "Class",
+                "Check items",
+                "Chech results",
+                "Remark",
+                "Back",
+                "Register"
+            ],
+            [
+                "DANH SÁCH HẠNG MỤC KIỂM TRA",
+                "ID",
+                "Phân loại",
+                "Nội dung kiểm tra",
+                "Kết quả",
+                "Ghi chú",
+                "Trở về",
+                "Đăng ký"
+            ],
+            [
+                "点検項目一覧",
+                "管理番号",
+                "分類",
+                "点検内容",
+                "点検結果",
+                "備考",
+                "戻る",
+                "登録"
+            ]
         ];
 
-        /**
-   * INITIALIZE MODAL
-*/
+        /*
+            * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("class").innerHTML = language[lang][2];
+            document.getElementById("checkItems").innerHTML = language[lang][3];
+            document.getElementById("checkResults").innerHTML = language[lang][4];
+            document.getElementById("remark").innerHTML = language[lang][5];
+            document.getElementById("backBtn").innerHTML = language[lang][6];
+            document.getElementById("torokuBtn").innerHTML = language[lang][7];
+        }
 
+        /**
+            * INITIALIZE MODAL
+        */
         function setupModal(status, title, message, textButton0, textButton1, textButton2, isClose) {
             // init view
             var modal = document.getElementById("myModal");
@@ -230,9 +292,6 @@
                     var button = document.createElement("button");
                     if (j < listItem[i].length - 2) {
                         if (j != listItem[i].length - 3) {
-                            //     cell.onclick = function () {
-                            //         Common.setupModal("info", null,listItem[i][j], null, StringCS.OK, null, false);
-                            //     }
                             span.textContent = listItem[i][j];
                             cell.appendChild(span);
                             cell.classList.add("text-center");
@@ -252,14 +311,40 @@
                         if (j == listItem[i].length - 2) {
                             var divLabel = document.createElement("div");
                             divLabel.classList.add("can-toggle__switch");
-                            divLabel.setAttribute("data-checked", "はい");
-                            divLabel.setAttribute("data-unchecked", "いいえ");
-                            if (listItem[i][j] == "はい") {
-                                label.appendChild(divLabel);
-                            }
-                            else {
-                                input.setAttribute("checked", "");
-                                label.appendChild(divLabel);
+                            switch (parseInt(sessionStorage.getItem("language"))) {
+                                case 0:
+                                    divLabel.setAttribute("data-checked", "Yes");
+                                    divLabel.setAttribute("data-unchecked", "No");
+                                    if (listItem[i][j] == "Yes") {
+                                        label.appendChild(divLabel);
+                                    }
+                                    else {
+                                        input.setAttribute("checked", "");
+                                        label.appendChild(divLabel);
+                                    }
+                                    break;
+                                case 1:
+                                    divLabel.setAttribute("data-checked", "Có");
+                                    divLabel.setAttribute("data-unchecked", "Không");
+                                    if (listItem[i][j] == "Có") {
+                                        label.appendChild(divLabel);
+                                    }
+                                    else {
+                                        input.setAttribute("checked", "");
+                                        label.appendChild(divLabel);
+                                    }
+                                    break;
+                                case 2:
+                                    divLabel.setAttribute("data-checked", "はい");
+                                    divLabel.setAttribute("data-unchecked", "いいえ");
+                                    if (listItem[i][j] == "はい") {
+                                        label.appendChild(divLabel);
+                                    }
+                                    else {
+                                        input.setAttribute("checked", "");
+                                        label.appendChild(divLabel);
+                                    }
+                                    break;
                             }
                             label.setAttribute("for", listItem[i][0])
                             input.setAttribute("id", listItem[i][0]);
@@ -273,7 +358,17 @@
                         }
                         else {
                             button.id = i;
-                            button.append("編集");
+                            switch (parseInt(sessionStorage.getItem("language"))) {
+                                case 0:
+                                    button.append("Edit");
+                                    break;
+                                case 1:
+                                    button.append("Sửa");
+                                    break;
+                                case 2:
+                                    button.append("編集");
+                                    break;
+                            }
                             button.classList.add("btn");
                             button.classList.add("btn-default");
                             button.classList.add("detail-btn");
@@ -289,8 +384,8 @@
         }
 
         /**
-* MOVING TO ANOTHER PAGE
-*/
+            * MOVING TO ANOTHER PAGE
+        */
         function movePage(page) {
             window.location.href = page;
         }
@@ -303,21 +398,35 @@
                 movePage('./login.html');
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./equipment_daily_check_list.html");
             }
 
             document.getElementById("torokuBtn").onclick = function () {
-                setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                switch (parseInt(sessionStorage.getItem("language"))) {
+                    case 0:
+                        setupModal("success", null, "Data saved successfully.", null, "OK", null, false);
+                        break;
+                    case 1:
+                        setupModal("success", null, "Dữ liệu đã lưu thành công.", null, "OK", null, false);
+                        break;
+                    case 2:
+                        setupModal("success", null, "データ保存に成功しました。", null, "OK", null, false);
+                        break;
+                }
                 document.getElementById("buttonAreaModal").onclick = function () {
                     movePage("./equipment_daily_check_list.html");
                 }
             }
 
             $('#setsubiIchiran').on('click', 'tbody tr td button', function () {
-                sessionStorage.setItem("status", dailyCheckList[this.id][4]);
-                sessionStorage.setItem("inspectionDetail", dailyCheckList[this.id][3]);
-                sessionStorage.setItem("controlNumber", dailyCheckList[this.id][1]);
+                sessionStorage.setItem("status", dailyCheckList[parseInt(sessionStorage.getItem("language"))][this.id][4]);
+                sessionStorage.setItem("inspectionDetail", dailyCheckList[parseInt(sessionStorage.getItem("language"))][this.id][3]);
+                sessionStorage.setItem("controlNumber", dailyCheckList[parseInt(sessionStorage.getItem("language"))][this.id][1]);
                 movePage("./equipment_daily_check_detail.html");
             })
         }
@@ -327,8 +436,24 @@
         */
         function onLoadAction() {
             onClickAction();
-            generateTable(dailyCheckList);
-            document.getElementById("title").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            generateTable(dailyCheckList[parseInt(sessionStorage.getItem("language"))])
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
+            document.getElementById("titleGroup").innerHTML = sessionStorage.getItem("area") + "　＞　" + sessionStorage.getItem("item");
         }
 
         window.onload = onLoadAction;

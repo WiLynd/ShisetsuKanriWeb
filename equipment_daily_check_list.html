@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>管理対象設備一覧</title>
+    <title id="title">管理対象設備一覧</title>
     <link rel="icon" type="image/png" href="./imgs/icons/ic-list.svg" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -27,8 +27,14 @@
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownSelectRole">
                     <li>
+                        <a class="dropdown-item scan-page" id="menuOption">
+                            <span class="text" id="menuBtn"><i class="m-r-10 menu fas fa-bars"></i>メニュー</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item scan-page" id="logoutOption">
-                            <span class="text"><i class="ic-dropdown logout fas fa-sign-out-alt"></i>ログアウト</span>
+                            <span class="text" id="logoutBtn"><i
+                                    class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト</span>
                         </a>
                     </li>
                 </ul>
@@ -39,7 +45,7 @@
                     管理対象設備一覧
                 </span>
                 <p class="divider-text">
-                    <span class="title-group" id="title"></span>
+                    <span class="title-group" id="titleGroup"></span>
                 </p>
 
                 <div class="row content">
@@ -50,13 +56,13 @@
                                     <th class="col-1">
                                         No.
                                     </th>
-                                    <th class="col-3">
+                                    <th class="col-3" id="idNumber">
                                         管理番号
                                     </th>
-                                    <th class="col-6">
+                                    <th class="col-6" id="controlItems">
                                         管理項目
                                     </th>
-                                    <th class="col-2">
+                                    <th class="col-2" id="remark">
                                         備考
                                     </th>
                                 </tr>
@@ -67,14 +73,12 @@
 
                 <div class="button-area p-b-10">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <button type="button" class="btn btn-default text-center" id="backBtn">戻る</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-4">
                         </div>
                     </div>
                 </div>
@@ -98,8 +102,8 @@
         /**
 * GENERATE TABLE
 */
-        function generateTable(listItem, tableName) {
-            const table = document.getElementById(tableName);
+        function generateTable(listItem) {
+            const table = document.getElementById("setsubiIchiran");
             const tbody = document.createElement("tbody");
             table.appendChild(tbody);
             for (let i = 0; i < listItem.length; i++) {
@@ -120,17 +124,78 @@
 
         /*****  VIEW VARIABLE  *****/
         const equipmentDailyCheckList = [
-            [1, "WP1-01", "ガス溶接機", ""],
-            [2, "WP1-02", "アーク溶接機", ""],
-            [3, "WP1-03", "ティグ溶接機", ""],
-            [4, "WP1-04", "ガス溶接機", ""],
-            [5, "WP1-05", "アーク溶接機", ""],
-            [6, "WP1-06", "ティグ溶接機", ""],
-            [7, "WP1-07", "ガス溶接機", ""],
-            [8, "WP1-08", "アーク溶接機", ""],
-            [9, "WP1-09", "ティグ溶接機", ""],
-            [10, "WP1-10", "ガス溶接機", ""],
-        ]
+            [
+                [1, "WP1-01", "Gas welder", ""],
+                [2, "WP1-02", "Arc welder", ""],
+                [3, "WP1-03", "Tig welder", ""],
+                [4, "WP1-04", "Gas welder", ""],
+                [5, "WP1-05", "Arc welder", ""],
+                [6, "WP1-06", "Tig welder", ""],
+                [7, "WP1-07", "Gas welder", ""],
+                [8, "WP1-08", "Arc welder", ""],
+                [9, "WP1-09", "Tig welder", ""],
+                [10, "WP1-10", "Gas welder", ""],
+            ],
+            [
+                [1, "WP1-01", "Máy hàn gas", ""],
+                [2, "WP1-02", "Máy hàn hồ quang", ""],
+                [3, "WP1-03", "Máy hàn Tig", ""],
+                [4, "WP1-04", "Máy hàn gas", ""],
+                [5, "WP1-05", "Máy hàn hồ quang", ""],
+                [6, "WP1-06", "Máy hàn Tig", ""],
+                [7, "WP1-07", "Máy hàn gas", ""],
+                [8, "WP1-08", "Máy hàn hồ quang", ""],
+                [9, "WP1-09", "Máy hàn Tig", ""],
+                [10, "WP1-10", "Máy hàn gas", ""],
+            ],
+            [
+                [1, "WP1-01", "ガス溶接機", ""],
+                [2, "WP1-02", "アーク溶接機", ""],
+                [3, "WP1-03", "ティグ溶接機", ""],
+                [4, "WP1-04", "ガス溶接機", ""],
+                [5, "WP1-05", "アーク溶接機", ""],
+                [6, "WP1-06", "ティグ溶接機", ""],
+                [7, "WP1-07", "ガス溶接機", ""],
+                [8, "WP1-08", "アーク溶接機", ""],
+                [9, "WP1-09", "ティグ溶接機", ""],
+                [10, "WP1-10", "ガス溶接機", ""],
+            ]
+        ];
+        var language = [
+            [
+                "LIST OF MANAGED EQUIPMENT",
+                "ID",
+                "Control items",
+                "Remark",
+                "Back"
+            ],
+            [
+                "DANH MỤC QUẢN LÝ THIẾT BỊ",
+                "ID",
+                "Danh mục quản lý",
+                "Ghi chú",
+                "Trở về"
+            ],
+            [
+                "管理対象設備一覧",
+                "管理番号",
+                "管理項目",
+                "備考",
+                "戻る"
+            ]
+        ];
+
+        /*
+           * SET LANGUAGE DATA
+        */
+        function setLanguage(lang) {
+            document.getElementById("title").innerHTML = language[lang][0];
+            document.getElementById("titleForm").innerHTML = language[lang][0];
+            document.getElementById("idNumber").innerHTML = language[lang][1];
+            document.getElementById("controlItems").innerHTML = language[lang][2];
+            document.getElementById("remark").innerHTML = language[lang][3];
+            document.getElementById("backBtn").innerHTML = language[lang][4];
+        }
 
         /*
            * ONCLICK ACTION
@@ -140,12 +205,16 @@
                 movePage('./login.html');
             }
 
+            document.getElementById("menuOption").onclick = function () {
+                movePage('./menu.html')
+            }
+
             document.getElementById("backBtn").onclick = function () {
                 movePage("./area_list_check.html");
             }
 
             $('#setsubiIchiran').on('click', 'tbody tr', function () {
-                sessionStorage.setItem("item", equipmentDailyCheckList[this.id][2]);
+                sessionStorage.setItem("item", equipmentDailyCheckList[parseInt(sessionStorage.getItem("language"))][this.id][2]);
                 movePage("./daily_check_list.html");
             })
         }
@@ -155,8 +224,23 @@
         */
         function onLoadAction() {
             onClickAction();
-            generateTable(equipmentDailyCheckList, "setsubiIchiran");
-            document.getElementById("title").innerHTML = sessionStorage.getItem("area");
+            setLanguage(parseInt(sessionStorage.getItem("language")));
+            generateTable(equipmentDailyCheckList[parseInt(sessionStorage.getItem("language"))]);
+            switch (parseInt(sessionStorage.getItem("language"))) {
+                case 0:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Logout';
+                    break;
+                case 1:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>Menu';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>Đăng xuất';
+                    break;
+                case 2:
+                    document.getElementById("menuBtn").innerHTML = '<i class="m-r-10 menu fas fa-sign-out-alt"></i>メニュー';
+                    document.getElementById("logoutBtn").innerHTML = '<i class="m-r-10 logout fas fa-sign-out-alt"></i>ログアウト';
+                    break;
+            }
+            document.getElementById("titleGroup").innerHTML = sessionStorage.getItem("area");
         }
 
         window.onload = onLoadAction;

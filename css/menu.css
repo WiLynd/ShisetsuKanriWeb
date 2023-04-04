@@ -4,6 +4,10 @@ body {
 	font-family: sans-serif;
 }
 
+img {
+	width: 40px;
+  }
+
 .btn-lg {
     padding: 20px 10px !important;
 }
